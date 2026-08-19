@@ -1,0 +1,557 @@
+@import "tailwindcss";
+
+@theme {
+  /* Breakpoints */
+  --breakpoint-xs: 0px;
+  --breakpoint-sm: 490px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1040px;
+  --breakpoint-xl: 1440px;
+
+  /* Font */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+
+  --font-mono: 'Source Code Pro', Menlo, Monaco, monospace;
+
+  /* Layout */
+  --spacing-sidebar-width: 250px;
+  --spacing-mobile-sidebar-width: 300px;
+  --spacing-docs-sidebar-width: 260px;
+
+  /* Docs */
+  --color-docs-accent: #5469d4;
+  --color-docs-accent-hover: #44139f;
+  --color-docs-accent-bg: rgba(84, 105, 212, 0.08);
+
+  /* Remove default Tailwind text size utilities (use @utility text styles instead) */
+  --text-*: initial;
+
+  /* Neutral scale (color.neutral) */
+  --color-neutral-0: #ffffff;
+  --color-neutral-25: #F4F7FA;
+  --color-neutral-50: #ECF1F6;
+  --color-neutral-100: #D4DEE9;
+  --color-neutral-200: #BAC8DA;
+  --color-neutral-300: #95A4BA;
+  --color-neutral-400: #7D8BA4;
+  --color-neutral-500: #667691;
+  --color-neutral-600: #50617A;
+  --color-neutral-700: #3C4F69;
+  --color-neutral-800: #273951;
+  --color-neutral-900: #1A2C44;
+
+  /* Brand scale (color.brand / purple) */
+  --color-brand-0: #ffffff;
+  --color-brand-25: #f7f5fd;
+  --color-brand-50: #efecfc;
+  --color-brand-100: #e0d9fb;
+  --color-brand-200: #c3b6fb;
+  --color-brand-300: #a497fc;
+  --color-brand-400: #857afe;
+  --color-brand-500: #675dff;
+  --color-brand-600: #533afd;
+  --color-brand-700: #4e11e2;
+  --color-brand-800: #44139f;
+  --color-brand-900: #2f0e63;
+
+  /* Colors - use as bg-primary, text-primary, border-primary, etc. */
+  --color-surface: #ffffff;
+  --color-offset: #F5F6F8;
+  --color-border: #D8DEE4;
+  --color-danger: #dc2626;
+  --color-overlay-backdrop: rgba(186, 200, 218, 0.7);
+
+  /* Text */
+  --color-default: #353A44;
+  --color-subdued: #596171;
+  --color-placeholder: #A1A8B7;
+  --color-brand: #533AFD;
+  --color-info: #045AD0;
+  --color-success: #217005;
+  --color-attention: #B13600;
+  --color-critical: #C0123C;
+
+  /* Icon */
+  --color-icon-default: #474E5A;
+  --color-icon-subdued: #6C7688;
+  --color-icon-brand: #675DFF;
+  --color-icon-info: #0072E9;
+  --color-icon-success: #2B8700;
+  --color-icon-attention: #CC4B00;
+  --color-icon-critical: #E61947;
+
+  /* Buttons */
+  --color-button-primary-bg: #533afd;
+  --color-button-primary-border: #675DFF;
+  --color-button-primary-border-hover: #4E11E2;
+  --color-button-primary-text: #FFFFFF;
+  --color-button-primary-pressed: #533AFD;
+
+  --color-button-secondary-bg: #FFFFFF;
+  --color-button-secondary-border: #D8DEE4;
+  --color-button-secondary-border-hover: #99A5B8;
+  --color-button-secondary-text: #353A44;
+  --color-button-secondary-pressed: #F5F6F8;
+
+  --color-button-danger-bg: #E61947;
+  --color-button-danger-border: #E61947;
+  --color-button-danger-border-hover: #9B0C36;
+  --color-button-danger-text: #FFFFFF;
+  --color-button-danger-pressed: #C0123C;
+
+  /* Badge variants */
+  --color-badge-default-bg: #F5F6F8;
+  --color-badge-default-border: #F5F6F8;
+  --color-badge-default-text: #596171;
+
+  --color-badge-success-bg: #EAFCDD;
+  --color-badge-success-border: #EAFCDD;
+  --color-badge-success-text: #217005;
+
+  --color-badge-warning-bg: #FDF8C9;
+  --color-badge-warning-border: #FDF8C9;
+  --color-badge-warning-text: #B13600;
+
+  --color-badge-danger-bg: #FEF4F6;
+  --color-badge-danger-border: #FEF4F6;
+  --color-badge-danger-text: #C0123C;
+
+  --color-badge-info-bg: #E2FBFE;
+  --color-badge-info-border: #E2FBFE;
+  --color-badge-info-text: #045AD0;
+
+  /* Tooltip (elevated surface in dark mode) */
+  --color-tooltip-surface: #ffffff;
+  --color-tooltip-border: #D8DEE4;
+  --color-tooltip-label-bg: #3C4F69;
+  --color-tooltip-label-text: #ffffff;
+
+  /* Icon buttons */
+  --color-icon-button-text: #9ca3af;
+  --color-icon-button-hover-text: #4b5563;
+  --color-icon-button-hover-bg: #f3f4f6;
+
+  /* Chart categorical palette */
+  --color-chart-1: #9966FF;
+  --color-chart-2: #0055BC;
+  --color-chart-3: #00A1C2;
+  --color-chart-4: #ED6804;
+  --color-chart-5: #B3063D;
+  --color-chart-6: #1c5a0d;
+  --color-chart-7: #fa4a67;
+  --color-chart-8: #922700;
+  --color-chart-9: #3da00b;
+}
+
+/* Dark mode overrides */
+.dark {
+  /* Neutral scale */
+  --color-neutral-0: #14171d;
+  --color-neutral-25: #1b1e25;
+  --color-neutral-50: #21252c;
+  --color-neutral-100: #2b3039;
+  --color-neutral-200: #3e444f;
+  --color-neutral-300: #505865;
+  --color-neutral-400: #636c7b;
+  --color-neutral-500: #768193;
+  --color-neutral-600: #8c99ad;
+  --color-neutral-700: #a9b2c2;
+  --color-neutral-800: #c9ced8;
+  --color-neutral-900: #eceef1;
+
+  /* Brand scale */
+  --color-brand-0: #1e0a3f;
+  --color-brand-25: #270e50;
+  --color-brand-50: #2f105f;
+  --color-brand-100: #3c147c;
+  --color-brand-200: #5017b7;
+  --color-brand-300: #581bf7;
+  --color-brand-400: #5f4cfe;
+  --color-brand-500: #746cff;
+  --color-brand-600: #9289fe;
+  --color-brand-700: #b1a7fd;
+  --color-brand-800: #d1c8fc;
+  --color-brand-900: #efecfd;
+
+  /* Colors - use as bg-primary, text-primary, border-primary, etc. */
+  --color-surface: #14171d;
+  --color-offset: #1b1e25;
+  --color-border: #2b3039;
+  --color-overlay-backdrop: rgba(14, 14, 17, 0.70);
+
+  --color-default: #eceef1;
+  --color-subdued: #c9ced8;
+  --color-placeholder: #828a9a;
+  --color-brand: #9289fe;
+  --color-info: #2b9df6;
+  --color-success: #3eae20;
+  --color-attention: #f27400;
+  --color-critical: #f46b7d;
+
+  --color-icon-default: #a9b2c2;
+  --color-icon-subdued: #768193;
+  --color-icon-brand: #9289fe;
+  --color-icon-info: #2b9df6;
+  --color-icon-success: #3eae20;
+  --color-icon-attention: #f27400;
+  --color-icon-critical: #f46b7d;
+
+  --color-button-primary-bg: #5f4cfe;
+  --color-button-primary-border: #5f4cfe;
+  --color-button-primary-border-hover: #5f4cfe;
+  --color-button-primary-text: #ffffff;
+  --color-button-primary-pressed: #581bf7;
+
+  --color-button-secondary-bg: #252a37;
+  --color-button-secondary-border: #3a3f4e;
+  --color-button-secondary-border-hover: #555c6e;
+  --color-button-secondary-text: #e4e6eb;
+  --color-button-secondary-pressed: #1b1f2a;
+
+  --color-button-danger-bg: #e61947;
+  --color-button-danger-border: #e61947;
+  --color-button-danger-border-hover: #ff5271;
+  --color-button-danger-text: #ffffff;
+  --color-button-danger-pressed: #c0123c;
+
+  --color-badge-default-bg: #252a37;
+  --color-badge-default-border: #3a3f4e;
+  --color-badge-default-text: #9ba3b5;
+
+  --color-badge-success-bg: #1a3a1a;
+  --color-badge-success-border: #2d5a2d;
+  --color-badge-success-text: #4caf50;
+
+  --color-badge-warning-bg: #3a2a0a;
+  --color-badge-warning-border: #5a4020;
+  --color-badge-warning-text: #ff9800;
+
+  --color-badge-danger-bg: #3a1020;
+  --color-badge-danger-border: #5a2030;
+  --color-badge-danger-text: #ff5271;
+
+  --color-badge-info-bg: #0a2a3a;
+  --color-badge-info-border: #1a4060;
+  --color-badge-info-text: #4d9fff;
+
+  /* Tooltip (elevated dark surface, matching pay-server darkMode.ts) */
+  --color-tooltip-surface: #2b3039;
+  --color-tooltip-border: #3e444f;
+  --color-tooltip-label-bg: #2b3039;
+  --color-tooltip-label-text: #eceef1;
+
+  --color-icon-button-text: #6c7688;
+  --color-icon-button-hover-text: #e4e6eb;
+  --color-icon-button-hover-bg: #252a37;
+
+  /* Chart categorical palette (brighter for dark backgrounds) */
+  --color-chart-1: #b38aff;
+  --color-chart-2: #4d9fff;
+  --color-chart-3: #33d6e8;
+  --color-chart-4: #ff8c3a;
+  --color-chart-5: #ff5271;
+  --color-chart-6: #4dcc2e;
+  --color-chart-7: #ff7088;
+  --color-chart-8: #ff6633;
+  --color-chart-9: #6ddd33;
+}
+
+@layer base {
+  html {
+    scrollbar-gutter: stable;
+
+    /* WebKit (Chrome, Safari, Edge) */
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: rgba(0, 0, 0, 0.3);
+      border-radius: 3px;
+    }
+
+    /* Firefox */
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+  }
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  font-family: var(--font-sans);
+}
+
+.dark body {
+  background-color: #14171d;
+}
+
+/* Hide scrollbar while still allowing scroll */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  scrollbar-gutter: auto;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Dialog animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes scaleOut {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+/* Typography utilities */
+
+@utility text-display-xlarge {
+  font-weight: 700;
+  font-size: 56px;
+  line-height: 64px;
+}
+
+@utility text-display-xlarge-subdued {
+  font-weight: 400;
+  font-size: 56px;
+  line-height: 64px;
+}
+
+@utility text-display-large {
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 56px;
+}
+
+@utility text-display-large-subdued {
+  font-weight: 400;
+  font-size: 48px;
+  line-height: 56px;
+}
+
+@utility text-display-medium {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 48px;
+}
+
+@utility text-display-medium-subdued {
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 48px;
+}
+
+@utility text-display-small {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 40px;
+}
+
+@utility text-display-small-subdued {
+  font-weight: 400;
+  font-size: 32px;
+  line-height: 40px;
+}
+
+@utility text-heading-xlarge {
+  font-weight: 700;
+  font-size: 28px;
+  line-height: 36px;
+}
+
+@utility text-heading-xlarge-subdued {
+  font-weight: 400;
+  font-size: 28px;
+  line-height: 36px;
+}
+
+@utility text-heading-large {
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+@utility text-heading-large-subdued {
+  font-weight: 400;
+  font-size: 24px;
+  line-height: 32px;
+}
+
+@utility text-heading-medium {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+@utility text-heading-medium-subdued {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 28px;
+}
+
+@utility text-heading-small {
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@utility text-heading-small-subdued {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@utility text-heading-xsmall {
+  font-weight: 700;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+@utility text-heading-xsmall-subdued {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+@utility text-body-large {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+@utility text-body-large-emphasized {
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+@utility text-body-medium {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@utility text-body-medium-emphasized {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@utility text-body-small {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+@utility text-body-small-emphasized {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+@utility text-label-large {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@utility text-label-large-emphasized {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@utility text-label-medium {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+@utility text-label-medium-emphasized {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+@utility text-label-small {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+@utility text-label-small-emphasized {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+@utility text-monospace-small-emphasized {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+@utility text-monospace-small {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+@utility text-monospace-xsmall-emphasized {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+@utility text-monospace-xsmall {
+  font-family: var(--font-mono);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 16px;
+}

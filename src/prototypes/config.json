@@ -1,0 +1,13 @@
+{
+  "prototype1": {
+    "name": "Dashboard",
+    "description": "Full dashboard with sidebar, header, and control panel.",
+    "status": "active",
+    "default": true
+  },
+  "prototype2": {
+    "name": "Docs",
+    "description": "Prototype Stripe docs pages using Markdoc",
+    "status": "active"
+  }
+}

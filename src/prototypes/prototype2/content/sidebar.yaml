@@ -1,0 +1,116 @@
+sections:
+  - heading: null
+    items:
+      - label: Prototype overview
+        content: getting-started.md
+        default: true
+      - label: Components
+        content: components.md
+        href: components
+  - heading: null
+    items:
+      - label: Overview
+      - label: Get started with Connect
+        children:
+          - label: How Connect works
+          - label: Connect and the Accounts v2 API
+          - label: SaaS platforms and marketplaces
+          - label: Risk management with Connect
+            children:
+              - label: Understand the merchant of record
+              - label: Migrate to account controller properties
+              - label: Compare SaaS platform configurations for Accounts v1 and Accounts v2
+              - label: Upcoming requirements updates
+              - label: Onboarding Quickstart
+      - label: Design your integration
+        children:
+          - label: Interactive platform guide
+          - label: SaaS platform
+            children: []
+          - label: Marketplace
+            children: []
+      - label: Integration fundamentals
+        children:
+          - label: Make API calls for connected accounts
+          - label: Integration recommendations
+          - label: Migrate to a supported configuration
+          - label: Configure the behavior of connected accounts
+          - label: Use the Accounts v2 API in your existing integration
+          - label: Use Accounts as customers
+          - label: Listen for updates
+          - label: Testing
+      - label: Example integrations
+        children:
+          - label: Build a fully embedded Connect integration
+            children: []
+          - label: Charge SaaS fees to connected accounts
+          - label: LEGACY ACCOUNTS V1 INTEGRATIONS
+          - label: Create subscriptions using Stripe balance payments
+          - label: Design an advanced integration
+          - label: Build a marketplace
+          - label: Build a SaaS platform
+  - heading: Account management
+    items:
+      - label: Onboard accounts
+        children:
+          - label: Choose your onboarding configuration
+            children: []
+          - label: Service agreement types
+            children: []
+          - label: Networked onboarding
+          - label: Migrate to Stripe
+      - label: Configure account Dashboards
+        children:
+          - label: Get started with Connect embedded components
+            children: []
+          - label: Customize Connect embedded components
+            children: []
+          - label: Supported Connect embedded components
+            children: []
+          - label: Stripe Dashboard customization
+          - label: Platform controls for Stripe Dashboard accounts
+          - label: Express Dashboard
+            children: []
+      - label: Capabilities and information requirements
+        children:
+          - label: Account capabilities and configurations
+            children: []
+          - label: Required verification information
+            children: []
+          - label: Additional verifications
+      - label: Work with connected account types
+        children:
+          - label: Connected account types
+          - label: Dynamic payment methods
+  - heading: Payment processing
+    items:
+      - label: Accept payments
+        children:
+          - label: Charges in a Connect integration
+            children: []
+          - label: Set statement descriptors
+          - label: Set MCCs
+          - label: Handle multiple currencies
+            children: []
+          - label: Create payment links with Connect
+          - label: Use Radar with Connect
+          - label: Disputes on Connect
+          - label: Create subscriptions
+          - label: Create invoices
+          - label: Multiple payment method configurations
+          - label: Embed the payment method settings component
+          - label: Account balance
+            children: []
+      - label: Pay out to accounts
+        children:
+          - label: Payouts to connected accounts
+          - label: Manage payout accounts for connected accounts
+          - label: Manage payout schedule
+          - label: Manual payouts
+          - label: Payout reversals
+          - label: Payout statement descriptors
+          - label: Multi-currency settlement
+          - label: Instant Payouts
+          - label: Multiprocessor payouts for marketplaces
+          - label: Cross-border payouts
+          - label: Stablecoin payouts
