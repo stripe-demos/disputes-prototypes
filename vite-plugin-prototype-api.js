@@ -55,7 +55,7 @@ export default function prototypeApiPlugin() {
 
               if (updates.name !== undefined) config[id].name = updates.name.trim();
               if (updates.description !== undefined) config[id].description = updates.description.trim();
-              if (updates.status !== undefined && (updates.status === 'active' || updates.status === 'archived')) {
+              if (updates.status !== undefined && ['idea', 'in_review', 'shipped'].includes(updates.status)) {
                 config[id].status = updates.status;
               }
 
@@ -159,7 +159,7 @@ export default function prototypeApiPlugin() {
 
               // Update config
               const config = readConfig();
-              config[id] = { name: name.trim(), description: description.trim(), status: 'active' };
+              config[id] = { name: name.trim(), description: description.trim(), status: 'idea' };
               writeConfig(config);
 
               res.setHeader('Content-Type', 'application/json');

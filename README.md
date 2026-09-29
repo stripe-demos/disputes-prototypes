@@ -15,7 +15,7 @@ Visit `http://localhost:5173` to see the dashboard.
 
 This template supports multiple independent prototypes, each with its own pages, sidebar, data, and control panel.
 
-- The homepage `/` shows a table of all prototypes. Each prototype is accessed by its id: `/prototype1`.
+- The homepage `/` shows a table of all prototypes. Each prototype is accessed by its id, e.g. `/prototype2`.
 - Create a new prototype by running `npm run create-prototype` in terminal. Enter a name and description and it will scaffold all the necessary files. Available templates: `dashboard-shell`, `empty`, and `stripe-docs`.
 - Each prototype lives in `src/prototypes/[id]/`. Edit `src/prototypes/config.json` to update names, descriptions, or status.
 - Components in `src/components/` (Button, Badge, Table, etc.) are shared across all prototypes.
@@ -55,7 +55,8 @@ src/
 ├── prototypes/
 │   ├── config.json              # All prototype metadata (name, description, status)
 │   ├── index.js                 # Auto-discovery registry using import.meta.glob
-│   └── prototype1/              # Each prototype has its own directory
+│   ├── base-template/           # The base — a representation of the shipped product, hidden from the hub
+│   └── prototype2/               # Each prototype has its own directory
 │       ├── App.jsx              # Layout + routes + state
 │       ├── SidebarNav.jsx       # Prototype-specific sidebar navigation
 │       ├── HeaderNav.jsx        # Prototype-specific header action buttons

@@ -1,13 +1,14 @@
 {
-  "prototype1": {
-    "name": "Dashboard",
-    "description": "Full dashboard with sidebar, header, and control panel.",
-    "status": "active",
+  "base-template": {
+    "name": "Disputes (Base)",
+    "description": "Baseline representation of the currently shipped Disputes product. Branch off main to build new prototypes on top of this.",
+    "status": "shipped",
     "default": true
   },
   "prototype2": {
     "name": "Docs",
     "description": "Prototype Stripe docs pages using Markdoc",
-    "status": "active"
+    "status": "idea",
+    "hidden": true
   }
 }

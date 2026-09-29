@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useBasePath } from '../../contexts/BasePath';
 import { NavItem, SubNavItem, SectionHeading, ExpandableNavItem } from '../../sail/Sidebar';
@@ -8,9 +8,15 @@ import { Icon } from '../../icons/SailIcons';
 export default function SidebarNav() {
   const location = useLocation();
   const basePath = useBasePath();
-  const [expandedSection, setExpandedSection] = useState('connect');
+  const [expandedSection, setExpandedSection] = useState('payments');
 
   const isActive = (path) => location.pathname === (path ? `${basePath}/${path}` : basePath || '/');
+  const startsWith = (path) => location.pathname.startsWith(`${basePath}/${path}`);
+  const isSettings = startsWith('settings');
+
+  useEffect(() => {
+    if (isSettings) setExpandedSection(null);
+  }, [isSettings]);
 
   return (
     <>
@@ -31,7 +37,7 @@ export default function SidebarNav() {
       {/* Main Navigation */}
       <div className="">
         <NavItem icon={<Icon name="home" size="small" fill="currentColor" />} label="Home" to="" active={isActive('')} />
-        <NavItem icon={<Icon name="balance" size="small" fill="currentColor" />} label="Balances" to="balances" active={isActive('balances')} />
+        <NavItem icon={<Icon name="balance" size="small" fill="currentColor" />} label="Balances" />
         <NavItem icon={<Icon name="arrowsLoop" size="small" fill="currentColor" />} label="Transactions" />
         <NavItem icon={<Icon name="person" size="small" fill="currentColor" />} label="Network" />
         <NavItem icon={<Icon name="product" size="small" fill="currentColor" />} label="Product catalog" />
@@ -42,36 +48,33 @@ export default function SidebarNav() {
         <SectionHeading label="Products" />
         <div className="">
           <ExpandableNavItem
-            icon={<Icon name="platform" size="small" fill="currentColor" />}
-            label="Connect"
-            sectionId="connect"
-            expandedSection={expandedSection}
-            onToggle={setExpandedSection}
-          >
-            <SubNavItem
-              label="Overview"
-              to="connect"
-              highlighted={isActive('connect')}
-            />
-            <SubNavItem
-              label="Connected accounts"
-              to="connect/accounts"
-              highlighted={location.pathname.startsWith(basePath + '/connect/accounts')}
-            />
-            <SubNavItem label="Capital" />
-          </ExpandableNavItem>
-          <ExpandableNavItem
             icon={<Icon name="wallet" size="small" fill="currentColor" />}
             label="Payments"
             sectionId="payments"
             expandedSection={expandedSection}
             onToggle={setExpandedSection}
           >
+            <SubNavItem label="Overview" />
             <SubNavItem label="Analytics" />
-            <SubNavItem label="Disputes" />
+            <SubNavItem
+              label="Disputes"
+              to="disputes"
+              highlighted={startsWith('disputes')}
+            />
             <SubNavItem label="Radar" />
             <SubNavItem label="Payment Links" />
             <SubNavItem label="Terminal" />
+          </ExpandableNavItem>
+          <ExpandableNavItem
+            icon={<Icon name="platform" size="small" fill="currentColor" />}
+            label="Connect"
+            sectionId="connect"
+            expandedSection={expandedSection}
+            onToggle={setExpandedSection}
+          >
+            <SubNavItem label="Overview" />
+            <SubNavItem label="Connected accounts" />
+            <SubNavItem label="Capital" />
           </ExpandableNavItem>
           <ExpandableNavItem
             icon={<Icon name="invoice" size="small" fill="currentColor" />}
@@ -98,8 +101,6 @@ export default function SidebarNav() {
             <SubNavItem label="Revenue Recognition" />
             <SubNavItem label="Data management" />
           </ExpandableNavItem>
-          <NavItem icon={<Icon name="product" size="small" fill="currentColor" />} label="Components" to="components" active={isActive('components')} />
-          <NavItem icon={<Icon name="barChart" size="small" fill="currentColor" />} label="Charts" to="charts" active={isActive('charts')} />
           <NavItem icon={<Icon name="more" size="small" fill="currentColor" />} label="More" />
         </div>
       </div>

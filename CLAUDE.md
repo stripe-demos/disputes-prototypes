@@ -50,7 +50,7 @@ src/
   prototypes/
     index.js                 # Auto-discovery registry using import.meta.glob
     config.json              # All prototype metadata { id: { name, description, status, default? } }
-    prototype1/              # Default prototype (Dashboard Shell)
+    base-template/           # Base prototype — mirrors the shipped Disputes product, hidden from the hub grid
       App.jsx                # Layout + routes + state (receives basePath prop from root)
       SidebarNav.jsx         # Prototype-specific sidebar navigation content
       HeaderNav.jsx          # Prototype-specific header action buttons
@@ -66,7 +66,7 @@ scripts/
 vite-plugin-prototype-api.js # Dev server API for UI-based prototype CRUD
 ```
 
-Every prototype gets a `/:id/*` route prefix (e.g. `/prototype1/balances`). `/` always renders the `PrototypeList` page. The root `App.jsx` passes `basePath` as a prop to each prototype.
+Every prototype gets a `/:id/*` route prefix (e.g. `/base-template/disputes`). `/` always renders the `PrototypeList` page. The root `App.jsx` passes `basePath` as a prop to each prototype.
 
 ### Creating a New Prototype
 
@@ -209,7 +209,7 @@ All portaled dropdowns (`SelectDropdown`, `DateRangePicker`) use `useDropdownPos
 
 ### Routing & BasePath
 
-- The root `App.jsx` passes `basePath` (e.g. `"/prototype1"`) as a prop to each prototype's App component — **do not use `useResolvedPath`** (it has a known bug with splat routes in React Router 7)
+- The root `App.jsx` passes `basePath` (e.g. `"/base-template"`) as a prop to each prototype's App component — **do not use `useResolvedPath`** (it has a known bug with splat routes in React Router 7)
 - Each prototype's App wraps its content in `<BasePathContext.Provider value={basePath}>`
 - `NavItem` and `SubNavItem` call `useBasePath()` internally to build absolute links — callers just pass relative segments like `to="balances"`
 - Pages that need absolute paths (breadcrumbs, programmatic navigation) should use `useBasePath()` from `../../../contexts/BasePath`

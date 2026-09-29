@@ -20,9 +20,11 @@ const Breadcrumb = ({ pages, currentPage, showCurrentPage = true }) => {
           )}
         </span>
       ))}
-      <Chevron />
       {showCurrentPage && currentPage && (
-        <span className="text-body-small text-subdued">{currentPage}</span>
+        <>
+          <Chevron />
+          <span className="text-body-small text-subdued">{currentPage}</span>
+        </>
       )}
     </nav>
   );

@@ -1,6 +1,7 @@
 import React, { useState, useRef, useCallback } from 'react';
 import ReactDOM from 'react-dom';
 import { Checkbox } from './Input';
+import Button from './Button';
 import { Icon } from '../icons/SailIcons';
 import { FlagIcon } from '../icons/SailFlagIcons';
 import useDropdownPosition from './useDropdownPosition';
@@ -20,6 +21,10 @@ import useDropdownPosition from './useDropdownPosition';
  * @param {boolean}  searchable        - Show search field at top (default: false)
  * @param {string}   searchPlaceholder - Placeholder text for search input (default: 'Search...')
  * @param {React.RefObject} anchorRef  - Ref to the trigger element for positioning
+ * @param {boolean}  hideSelectAll     - Hide the "Select all" row in multi-select mode (default: false)
+ * @param {boolean}  showApplyButton  - Show a full-width primary "Apply" footer button instead of closing on each toggle (default: false)
+ * @param {function} onApply          - Called when the Apply button is clicked (footer only shown when showApplyButton is true)
+ * @param {string}   applyLabel       - Label for the footer button (default: 'Apply')
  */
 const SelectDropdown = React.forwardRef(
   (
@@ -32,6 +37,10 @@ const SelectDropdown = React.forwardRef(
       searchable = false,
       searchPlaceholder = 'Search...',
       anchorRef,
+      hideSelectAll = false,
+      showApplyButton = false,
+      onApply,
+      applyLabel = 'Apply',
     },
     ref
   ) => {
@@ -99,6 +108,7 @@ const SelectDropdown = React.forwardRef(
               options={filtered}
               value={value}
               onChange={onChange}
+              hideSelectAll={hideSelectAll}
             />
           ) : (
             <SingleSelectContent
@@ -114,6 +124,20 @@ const SelectDropdown = React.forwardRef(
             </div>
           )}
         </div>
+        {showApplyButton && (
+          <div className="-mx-[4px] px-2 py-2 border-t border-border">
+            <Button
+              variant="primary"
+              className="w-full"
+              onClick={() => {
+                onApply?.();
+                onClose?.();
+              }}
+            >
+              {applyLabel}
+            </Button>
+          </div>
+        )}
       </div>
     );
 
@@ -169,7 +193,7 @@ function SingleSelectContent({ options, value, onChange, onClose }) {
 
 /* ── Multi-select internals ── */
 
-function MultiSelectContent({ options, value, onChange }) {
+function MultiSelectContent({ options, value, onChange, hideSelectAll = false }) {
   const selected = Array.isArray(value) ? value : [];
   const allSelected = selected.length === options.length;
 
@@ -191,23 +215,27 @@ function MultiSelectContent({ options, value, onChange }) {
 
   return (
     <>
-      <div
-        className={`px-2 py-1 rounded-md text-label-medium transition-colors cursor-pointer ${allSelected ? 'text-brand' : 'text-default hover:bg-offset'
-          }`}
-      >
-        <Checkbox
-          checked={allSelected}
-          onChange={toggleAll}
-          label={
-            <span className="text-label-small-emphasized">
-              {selected.length === 0
-                ? `Select all (${options.length})`
-                : `${selected.length} selected`}
-            </span>
-          }
-        />
-      </div>
-      <div className="my-0.5" />
+      {!hideSelectAll && (
+        <>
+          <div
+            className={`px-2 py-1 rounded-md text-label-medium transition-colors cursor-pointer ${allSelected ? 'text-brand' : 'text-default hover:bg-offset'
+              }`}
+          >
+            <Checkbox
+              checked={allSelected}
+              onChange={toggleAll}
+              label={
+                <span className="text-label-small-emphasized">
+                  {selected.length === 0
+                    ? `Select all (${options.length})`
+                    : `${selected.length} selected`}
+                </span>
+              }
+            />
+          </div>
+          <div className="my-0.5" />
+        </>
+      )}
       {options.map((option) => {
         const isChecked = selected.includes(option.value);
         return (

@@ -40,7 +40,7 @@ const Table = ({
 
   // Get width class for header/cell (default: hug)
   const getWidthClass = (width) => {
-    return width === 'grow' ? '' : 'w-1 whitespace-nowrap';
+    return width === 'grow' ? 'whitespace-nowrap' : 'w-1 whitespace-nowrap';
   };
 
   // Render cell content
@@ -84,46 +84,48 @@ const Table = ({
             {isLoading ? <LoadingSpinner /> : <EmptyStateContent />}
           </div>
         ) : (
-          <table className="w-full">
-            <thead>
-              <tr className="border-b border-neutral-50">
-                {columns.map((column, colIndex) => (
-                  <th
-                    key={column.key || colIndex}
-                    className={`py-3 ${column.paddingX || cellPaddingX} text-label-small-emphasized text-default ${getAlignClass(column.align)} ${getWidthClass(column.width)}`}
-                  >
-                    {column.header || ''}
-                  </th>
-                ))}
-              </tr>
-            </thead>
-            <tbody>
-              {isLoading ? (
-                <tr>
-                  <td colSpan={columns.length} className="py-32">
-                    <LoadingSpinner />
-                  </td>
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-max">
+              <thead>
+                <tr className="border-b border-neutral-50">
+                  {columns.map((column, colIndex) => (
+                    <th
+                      key={column.key || colIndex}
+                      className={`py-3 ${column.paddingX || cellPaddingX} text-label-small-emphasized text-default ${getAlignClass(column.align)} ${getWidthClass(column.width)}`}
+                    >
+                      {column.header || ''}
+                    </th>
+                  ))}
                 </tr>
-              ) : (
-                data.map((item, rowIndex) => (
-                  <tr
-                    key={item[rowKey] ?? rowIndex}
-                    className={`border-b text-body-small text-subdued border-neutral-50 hover:bg-neutral-50/50 transition-colors duration-100 ${onRowClick ? 'cursor-pointer' : ''}`}
-                    onClick={() => onRowClick?.(item, rowIndex)}
-                  >
-                    {columns.map((column, colIndex) => (
-                      <td
-                        key={column.key || colIndex}
-                        className={`py-1 ${column.paddingX || cellPaddingX} h-[32px] ${getAlignClass(column.align)} ${getWidthClass(column.width)}`}
-                      >
-                        {renderCell(column, item, rowIndex)}
-                      </td>
-                    ))}
+              </thead>
+              <tbody>
+                {isLoading ? (
+                  <tr>
+                    <td colSpan={columns.length} className="py-32">
+                      <LoadingSpinner />
+                    </td>
                   </tr>
-                ))
-              )}
-            </tbody>
-          </table>
+                ) : (
+                  data.map((item, rowIndex) => (
+                    <tr
+                      key={item[rowKey] ?? rowIndex}
+                      className={`border-b text-body-small text-subdued border-neutral-50 hover:bg-neutral-50/50 transition-colors duration-100 ${onRowClick ? 'cursor-pointer' : ''}`}
+                      onClick={() => onRowClick?.(item, rowIndex)}
+                    >
+                      {columns.map((column, colIndex) => (
+                        <td
+                          key={column.key || colIndex}
+                          className={`py-3 ${column.paddingX || cellPaddingX} ${getAlignClass(column.align)} ${getWidthClass(column.width)}`}
+                        >
+                          {renderCell(column, item, rowIndex)}
+                        </td>
+                      ))}
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
         )}
       </div>
     </div>

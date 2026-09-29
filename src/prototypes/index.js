@@ -10,8 +10,10 @@ const prototypes = Object.entries(modules).map(([path, importFn]) => {
     id,
     name: meta.name || id,
     description: meta.description || '',
-    status: meta.status || 'active',
+    image: meta.image || null,
+    status: meta.status || 'idea',
     isDefault: meta.default === true,
+    hidden: meta.hidden === true,
     component: lazy(importFn),
   };
 });

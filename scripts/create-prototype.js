@@ -72,7 +72,7 @@ for (const [relativePath, content] of Object.entries(files)) {
 // Append to shared config.json
 const configPath = path.join(prototypesDir, 'config.json');
 const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
-config[id] = { name: displayName, description, status: 'active' };
+config[id] = { name: displayName, description, status: 'idea' };
 fs.writeFileSync(configPath, JSON.stringify(config, null, 2) + '\n');
 
 console.log(`\n✅ Created prototype "${displayName}" (${id})\n`);

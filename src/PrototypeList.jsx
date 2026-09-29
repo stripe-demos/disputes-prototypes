@@ -1,137 +1,47 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Icon } from './icons/SailIcons';
-import { Button, Dialog, Input, Radio, Textarea, Toggle } from './sail';
-import TEMPLATE_IMAGES from './components/TemplateImages';
+import { Button, Dialog, Input, Radio, Textarea } from './sail';
+
+const STATUS_LABELS = {
+  idea: 'Idea',
+  in_review: 'In review',
+  shipped: 'Shipped',
+};
 
 const STATUS_STYLES = {
-  active: 'bg-gradient-to-r from-brand-500 to-brand-700 text-white',
-  archived: 'bg-neutral-100 text-neutral-500',
+  idea: 'bg-neutral-100 text-neutral-500',
+  in_review: 'bg-badge-warning-bg text-badge-warning-text border border-badge-warning-border',
+  shipped: 'bg-badge-success-bg text-badge-success-text border border-badge-success-border',
 };
 
 function StatusPill({ status }) {
   return (
-    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-label-small-emphasized ${STATUS_STYLES[status] || STATUS_STYLES.archived}`}>
-      {status === 'archived' ? 'Archived' : 'Active'}
+    <span className={`inline-flex items-center px-2 py-0.5 rounded-full text-label-small-emphasized ${STATUS_STYLES[status] || STATUS_STYLES.idea}`}>
+      {STATUS_LABELS[status] || STATUS_LABELS.idea}
     </span>
   );
 }
 
-function CreateDialog({ open, onClose }) {
-  const navigate = useNavigate();
-  const [templates, setTemplates] = useState([]);
-  const [selectedTemplate, setSelectedTemplate] = useState('dashboard-shell');
-  const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState('');
-
-  useEffect(() => {
-    if (open) {
-      fetch('/__api/templates')
-        .then((r) => r.json())
-        .then(setTemplates)
-        .catch(() => {});
-    }
-  }, [open]);
-
-  const handleClose = () => {
-    setName('');
-    setDescription('');
-    setSelectedTemplate('dashboard-shell');
-    setError('');
-    onClose();
-  };
-
-  const nameError = error === 'Name is required' ? error : '';
-
-  const handleCreate = async () => {
-    if (!name.trim()) {
-      setError('Name is required');
-      return;
-    }
-    setLoading(true);
-    setError('');
-    try {
-      const res = await fetch('/__api/prototypes', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name.trim(), description: description.trim(), template: selectedTemplate }),
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        setError(data.error || 'Failed to create prototype');
-        return;
-      }
-      handleClose();
-      // The server triggers a full-reload via WebSocket after creating files.
-      // Use window.location so the browser does a full navigation after reload.
-      setTimeout(() => { window.location.href = `/${data.id}`; }, 500);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <Dialog
-      open={open}
-      onClose={handleClose}
-      title="Create prototype"
-      size="large"
-      footer={
-        <>
-          <Button variant="secondary" onClick={handleClose}>Cancel</Button>
-          <Button variant="primary" onClick={handleCreate} disabled={loading}>
-            {loading ? 'Creating...' : 'Create'}
-          </Button>
-        </>
-      }
-    >
-      <div className="space-y-4 pt-2">
-        <div>
-          <label className="block text-label-medium-emphasized text-default mb-2">Template</label>
-          <div className="grid grid-cols-3 gap-3">
-            {templates.map((t) => (
-              <Toggle
-                key={t.id}
-                image={TEMPLATE_IMAGES[t.id]}
-                title={t.name}
-                description={t.description}
-                selected={selectedTemplate === t.id}
-                onClick={() => setSelectedTemplate(t.id)}
-              />
-            ))}
-          </div>
-        </div>
-        <Input
-          label="Name"
-          value={name}
-          onChange={(e) => { setName(e.target.value); if (nameError) setError(''); }}
-          placeholder="My Prototype"
-          error={!!nameError}
-          errorMessage={nameError}
-        />
-        <Textarea
-          label="Description"
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          placeholder="What is this prototype for?"
-          rows={2}
-        />
-        {error && !nameError && (
-          <p className="text-label-small text-critical">{error}</p>
-        )}
+function PrototypeThumbnail({ image, name }) {
+  if (image) {
+    return (
+      <div className="w-full aspect-[16/10] rounded-t-lg overflow-hidden border-b border-border bg-offset">
+        <img src={image} alt={name} className="w-full h-full object-cover" />
       </div>
-    </Dialog>
+    );
+  }
+  return (
+    <div className="w-full aspect-[16/10] rounded-t-lg border-b border-border bg-offset flex items-center justify-center">
+      <span className="text-label-small text-subdued">No preview</span>
+    </div>
   );
 }
 
 function EditDialog({ open, onClose, prototype, prototypesCount }) {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [status, setStatus] = useState('active');
+  const [status, setStatus] = useState('idea');
   const [loading, setLoading] = useState(false);
   const [confirmingDelete, setConfirmingDelete] = useState(false);
   const [error, setError] = useState('');
@@ -143,7 +53,7 @@ function EditDialog({ open, onClose, prototype, prototypesCount }) {
     if (open && prototype) {
       setName(prototype.name || '');
       setDescription(prototype.description || '');
-      setStatus(prototype.status || 'active');
+      setStatus(prototype.status || 'idea');
       setError('');
       setConfirmingDelete(false);
     }
@@ -256,17 +166,24 @@ function EditDialog({ open, onClose, prototype, prototypesCount }) {
             <div className="flex flex-col gap-2">
               <Radio
                 name="status"
-                value="active"
-                checked={status === 'active'}
-                onChange={() => setStatus('active')}
-                label="Active"
+                value="idea"
+                checked={status === 'idea'}
+                onChange={() => setStatus('idea')}
+                label="Idea"
               />
               <Radio
                 name="status"
-                value="archived"
-                checked={status === 'archived'}
-                onChange={() => setStatus('archived')}
-                label="Archived"
+                value="in_review"
+                checked={status === 'in_review'}
+                onChange={() => setStatus('in_review')}
+                label="In review"
+              />
+              <Radio
+                name="status"
+                value="shipped"
+                checked={status === 'shipped'}
+                onChange={() => setStatus('shipped')}
+                label="Shipped"
               />
             </div>
           </div>
@@ -281,80 +198,68 @@ function EditDialog({ open, onClose, prototype, prototypesCount }) {
 
 export default function PrototypeList({ prototypes }) {
   const navigate = useNavigate();
-  const [createOpen, setCreateOpen] = useState(false);
   const [editTarget, setEditTarget] = useState(null);
 
   const isDev = import.meta.env.DEV;
+
+  // The base template represents the underlying shipped product, not a
+  // prototype to review — it never shows up in the grid. Individual
+  // prototypes can also be hidden while they're not ready to be shared.
+  const visiblePrototypes = prototypes.filter((p) => !p.isDefault && !p.hidden);
 
   return (
     <div className="min-h-screen bg-gradient-to-bl from-neutral-100 to-brand-0 py-12">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-between mb-8">
           <h1 className="text-heading-xlarge text-default">All prototypes</h1>
-          {isDev && (
-            <Button variant="primary" icon="add" onClick={() => setCreateOpen(true)}>
-              Create prototype
-            </Button>
-          )}
         </div>
-        <div className="border border-border rounded-lg overflow-hidden mb-6">
-          <table className="w-full bg-surface">
-            <thead>
-              <tr className="border-b border-border bg-offset">
-                <th className="py-3 px-4 text-label-small-emphasized text-subdued text-left whitespace-nowrap">STATUS</th>
-                <th className="py-3 px-4 text-label-small-emphasized text-subdued text-left">NAME</th>
-                <th className="py-3 px-4 text-label-small-emphasized text-subdued text-left">DESCRIPTION</th>
-                <th className="py-3 px-4 text-label-small-emphasized text-subdued text-left whitespace-nowrap">ID</th>
-                <th className="py-3 px-2"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {prototypes.map((p) => (
-                <tr
-                  key={p.id}
-                  onClick={() => navigate(`/${p.id}`)}
-                  className="border-b last:border-b-0 border-border hover:bg-offset transition-colors duration-100 cursor-pointer"
+        {visiblePrototypes.length === 0 ? (
+          <div className="border border-dashed border-border rounded-lg py-16 px-8 flex flex-col items-center justify-center mb-6">
+            <p className="text-body-medium-emphasized text-default">No prototypes yet</p>
+            <p className="text-body-small text-subdued mt-1">Prototypes will show up here once they're ready to share.</p>
+          </div>
+        ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+          {visiblePrototypes.map((p) => (
+            <div
+              key={p.id}
+              role="button"
+              tabIndex={0}
+              onClick={() => navigate(`/${p.id}`)}
+              onKeyDown={(e) => { if (e.key === 'Enter') navigate(`/${p.id}`); }}
+              className="relative bg-surface border border-border rounded-lg overflow-hidden text-left hover:border-neutral-200 transition-colors duration-100 cursor-pointer"
+            >
+              {isDev && (
+                <Button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setEditTarget(p);
+                  }}
+                  variant="secondary"
+                  className="absolute top-3 right-3 z-10"
+                  aria-label={`Edit ${p.name}`}
                 >
-                  <td className="py-4 px-4 w-1 whitespace-nowrap">
-                    <StatusPill status={p.status} />
-                  </td>
-                  <td className="py-4 px-4 text-body-small-emphasized text-default w-1 whitespace-nowrap">{p.name}</td>
-                  <td className="py-4 px-4 text-body-small text-subdued">{p.description}</td>
-                  <td className="py-4 px-4 text-body-small text-subdued w-1 whitespace-nowrap text-monospace-small">{p.id}</td>
-
-                  <td className="py-4 px-4 w-1">
-                    <div className="flex items-center gap-1">
-                      {isDev && (
-                        <Button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            setEditTarget(p);
-                          }}
-                          variant="secondary"
-                          aria-label={`Edit ${p.name}`}
-                        >
-                          <Icon name="edit" size="xsmall" fill="currentColor" />
-                        </Button>
-                      )}
-                    </div>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+                  <Icon name="edit" size="xsmall" fill="currentColor" />
+                </Button>
+              )}
+              <PrototypeThumbnail image={p.image} name={p.name} />
+              <div className="p-4">
+                <p className="text-body-medium-emphasized text-default mb-1">{p.name}</p>
+                <p className="text-body-small text-subdued">{p.description}</p>
+              </div>
+            </div>
+          ))}
         </div>
+        )}
       </div>
 
       {isDev && (
-        <>
-          <CreateDialog open={createOpen} onClose={() => setCreateOpen(false)} />
-          <EditDialog
-            open={!!editTarget}
-            onClose={() => setEditTarget(null)}
-            prototype={editTarget}
-            prototypesCount={prototypes.length}
-          />
-        </>
+        <EditDialog
+          open={!!editTarget}
+          onClose={() => setEditTarget(null)}
+          prototype={editTarget}
+          prototypesCount={prototypes.length}
+        />
       )}
     </div>
   );

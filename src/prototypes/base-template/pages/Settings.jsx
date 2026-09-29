@@ -98,7 +98,7 @@ const settingsSections = [
         icon: 'wallet',
         title: 'Payments',
         description: 'Checkout, payment methods, currency conversion, and more.',
-        to: null,
+        to: 'settings/payments?tab=disputes',
       },
       {
         icon: 'link',
