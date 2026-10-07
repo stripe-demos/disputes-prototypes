@@ -86,7 +86,7 @@ export const ExpandableNavItem = ({ icon, label, children, sectionId, expandedSe
   );
 };
 
-export const Sidebar = ({ sandboxMode = false, mobileMenuOpen = false, onClose, children }) => {
+export const Sidebar = ({ sandboxMode = false, topOffset = 0, contained = false, mobileMenuOpen = false, onClose, children }) => {
   const location = useLocation();
 
   // Auto-close mobile sidebar on route change
@@ -120,7 +120,8 @@ export const Sidebar = ({ sandboxMode = false, mobileMenuOpen = false, onClose, 
     return () => { document.documentElement.style.overflow = ''; };
   }, [mobileMenuOpen]);
 
-  const sidebarStyle = { top: sandboxMode ? SANDBOX_HEIGHT : 0, height: sandboxMode ? `calc(100vh - ${SANDBOX_HEIGHT}px)` : '100vh' };
+  const sidebarTop = (sandboxMode ? SANDBOX_HEIGHT : 0) + topOffset;
+  const sidebarStyle = { top: sidebarTop, height: `calc(${contained ? '100%' : '100vh'} - ${sidebarTop}px)` };
 
   const navContent = (
     <div className="flex-1 px-4 py-4 space-y-7 overflow-y-auto">
@@ -132,7 +133,7 @@ export const Sidebar = ({ sandboxMode = false, mobileMenuOpen = false, onClose, 
     <>
       {/* Desktop sidebar */}
       <div
-        className={`hidden lg:flex fixed left-0 w-sidebar-width bg-surface border-r border-neutral-50 flex-col z-10 shrink-0 ${sandboxMode ? 'rounded-tl-xl overflow-hidden' : ''}`}
+        className={`hidden lg:flex ${contained ? 'absolute' : 'fixed'} left-0 w-sidebar-width bg-surface border-r border-neutral-50 flex-col z-10 shrink-0 ${sandboxMode ? 'rounded-tl-xl overflow-hidden' : ''}`}
         style={sidebarStyle}
       >
         {navContent}
@@ -142,7 +143,7 @@ export const Sidebar = ({ sandboxMode = false, mobileMenuOpen = false, onClose, 
       <div className="lg:hidden">
         {/* Backdrop */}
         <div
-          className={`fixed top-0 left-0 right-0 bottom-0 z-40 bg-overlay-backdrop transition-opacity duration-200 ease-in-out ${mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'} ${sandboxMode ? 'rounded-t-xl overflow-hidden' : ''}`}
+          className={`${contained ? 'absolute' : 'fixed'} top-0 left-0 right-0 bottom-0 z-40 bg-overlay-backdrop transition-opacity duration-200 ease-in-out ${mobileMenuOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'} ${sandboxMode ? 'rounded-t-xl overflow-hidden' : ''}`}
           style={{ top: sidebarStyle.top }}
           onClick={onClose}
         >

@@ -256,6 +256,8 @@ export const Checkbox = ({
   description,
   disabled = false,
   className = '',
+  labelClassName = 'text-label-medium-emphasized text-default',
+  descriptionClassName = 'text-label-small text-subdued',
   ...props
 }) => {
   return (
@@ -270,9 +272,9 @@ export const Checkbox = ({
           {...props}
         />
         <div
-          className={`w-[14px] h-[14px] mt-0.5 border rounded-sm transition-colors flex items-center justify-center peer-focus:ring-[rgba(8,142,249,0.36)] peer-focus:ring-4 ${checked
-            ? 'bg-brand-500 border-brand-500'
-            : 'bg-surface border-border group-hover:border-gray-400'
+          className={`w-[14px] h-[14px] mt-0.5 border rounded transition-colors flex items-center justify-center peer-focus:ring-[rgba(8,142,249,0.36)] peer-focus:ring-4 ${checked
+            ? 'bg-brand-500 border-brand-500 shadow-[0px_1px_1px_0px_rgba(10,33,86,0.16)]'
+            : 'bg-surface border-border group-hover:border-gray-400 shadow-[0px_1px_1px_0px_rgba(33,37,44,0.16)]'
             }`}
         >
           <svg width="10" height="10" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg" className={checked ? 'opacity-100' : 'opacity-0'}>
@@ -283,10 +285,10 @@ export const Checkbox = ({
       {(label || description) && (
         <div className="space-y-0.5">
           {label && (
-            <span className="block text-label-medium-emphasized text-default">{label}</span>
+            <span className={`block ${labelClassName}`}>{label}</span>
           )}
           {description && (
-            <span className="block text-label-small text-subdued">{description}</span>
+            <span className={`block ${descriptionClassName}`}>{description}</span>
           )}
         </div>
       )}
@@ -303,6 +305,7 @@ export const Radio = ({
   description,
   disabled = false,
   className = '',
+  labelClassName = 'text-label-medium-emphasized',
   ...props
 }) => {
   return (
@@ -332,7 +335,7 @@ export const Radio = ({
       {(label || description) && (
         <div className="space-y-0.5">
           {label && (
-            <span className="block text-label-medium-emphasized text-default">{label}</span>
+            <span className={`block ${labelClassName} text-default`}>{label}</span>
           )}
           {description && (
             <span className="block text-label-small text-subdued">{description}</span>

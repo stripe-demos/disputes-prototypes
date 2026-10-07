@@ -1,0 +1,211 @@
+/* Cloned from listview-m2-prototype/apps/m2/src/app/globals.css.
+   Only the listview-engine rules that ListViewTemplate.tsx actually
+   references are included — m2's shadcn theme vars, Tailwind directives,
+   docs-page, and home-page rules are left out as out of scope for the
+   Disputes list clone. The two `bottom: 47px`/`48px` GlobalFooter offsets
+   from the original have been zeroed out below since smart-arb has no
+   GlobalFooter — see the inline comment on each. */
+
+/* ── Animatable CSS variables — enables endcap gradients to transition ───── */
+@property --bg {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: #FFFFFF;
+}
+@property --bg-t {
+  syntax: '<color>';
+  inherits: true;
+  initial-value: transparent;
+}
+
+/* ── Row backgrounds: both <tr> and <td> driven by --bg ─────────────────── */
+tbody tr[data-row-bg="white"]    { --bg: #FFFFFF;  --bg-t: rgba(255,255,255,0); }
+tbody tr[data-row-bg="zebra"]    { --bg: #F8F9FB;  --bg-t: rgba(248,249,251,0); }
+tbody tr[data-row-bg="selected"] { --bg: #F7F5FD;  --bg-t: rgba(247,245,253,0); cursor: pointer; }
+tbody tr[data-row-bg],
+tbody tr[data-row-bg] td { background-color: var(--bg); }
+
+tbody tr[data-row-bg="selected"] { transition: none; }
+
+/* ── Row hover — no !important needed (background is CSS-driven, not inline) */
+tbody tr.row-hoverable:hover,
+tbody tr.row-force-hover { --bg: #F8F9FB; --bg-t: rgba(248,249,251,0); cursor: pointer; }
+
+/* ── Hover rounded corners — !important beats the inline 0px on non-selected cells ── */
+tbody tr.row-hoverable:hover td:first-child,
+tbody tr.row-force-hover td:first-child { border-top-left-radius: 8px !important; border-bottom-left-radius: 8px !important; }
+tbody tr.row-hoverable:hover td:last-child,
+tbody tr.row-force-hover td:last-child  { border-top-right-radius: 8px !important; border-bottom-right-radius: 8px !important; }
+
+/* ── Hide bottom border on hovered row and the row immediately before it ── */
+tbody tr.row-hoverable:hover td,
+tbody tr.row-force-hover td { border-bottom-color: transparent !important; }
+tbody tr.row-hoverable:has(+ tr.row-hoverable:hover) td,
+tbody tr:has(+ tr.row-force-hover) td { border-bottom-color: transparent !important; }
+
+/* ── Hide bottom border on the row immediately above a selected row ──────── */
+tbody tr:has(+ tr[data-row-bg="selected"]) td { border-bottom-color: transparent !important; }
+
+/* ── Hide header bottom border when first tbody row is hovered or selected ── */
+.data-table:has(tbody tr:first-child.row-hoverable:hover) thead th,
+.data-table:has(tbody tr:first-child.row-force-hover) thead th,
+.data-table:has(tbody tr:first-child[data-row-bg="selected"]) thead th { border-bottom-color: transparent !important; }
+
+/* ── Selected row bottom border — divider only between consecutive selected  */
+tbody tr[data-row-bg="selected"] td { border-bottom-color: white !important; }
+tbody tr[data-row-bg="selected"]:has(+ tr[data-row-bg="selected"]) td { border-bottom-color: #fff !important; }
+
+tbody tr[data-row-bg="selected"]:hover { --bg: #EFECFC; --bg-t: rgba(239,236,252,0); }
+
+/* ── Suppress hover during column drag ──────────────────────────────────── */
+.no-row-hover tbody tr.row-hoverable:hover { --bg: unset; --bg-t: unset; transition: none; }
+
+/* ── Endcap scrims — 3-layer scaleX approach (eliminates opacity flash) ───── */
+.left-scrim, .header-left-scrim {
+  transform: scaleX(calc(12 / 88));
+  transform-origin: left center;
+  transition: transform 200ms cubic-bezier(0.2, 0, 0.1, 1);
+  pointer-events: none;
+}
+.left-scrim        { background: linear-gradient(to right, var(--bg) 40%, var(--bg-t) 100%); }
+.header-left-scrim { background: linear-gradient(to right, #fff 40%, rgba(255,255,255,0) 100%); }
+.scroll-left .left-scrim,
+.scroll-left .header-left-scrim { transform: scaleX(1); }
+
+.right-scrim, .header-right-scrim {
+  transform: scaleX(calc(12 / 88));
+  transform-origin: right center;
+  transition: transform 200ms cubic-bezier(0.2, 0, 0.1, 1);
+  pointer-events: none;
+}
+.right-scrim        { background: linear-gradient(to left, var(--bg) 0%, var(--bg-t) 100%); }
+.header-right-scrim { background: linear-gradient(to left, #fff 40%, rgba(255,255,255,0) 100%); }
+.scroll-right .right-scrim,
+.scroll-right .header-right-scrim { transform: scaleX(1); }
+
+/* Hover expands the right scrim and restores the 40% solid stop */
+tbody tr.row-hoverable:hover .right-scrim,
+tbody tr.row-force-hover .right-scrim               { transform: scaleX(1); background: linear-gradient(to left, var(--bg) 40%, var(--bg-t) 100%); }
+.no-row-hover tbody tr.row-hoverable:hover .right-scrim { transform: scaleX(calc(12 / 88)); }
+
+/* ── Toggle switch ──────────────────────────────────────────────────────── */
+.toggle-switch {
+  width: 32px;
+  height: 18px;
+  border-radius: 9px;
+  background: #D1D9E0;
+  position: relative;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 250ms cubic-bezier(0.2, 0, 0.1, 1);
+  border: none;
+  outline: none;
+}
+.toggle-switch.on { background: #675DFF; }
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  transition: transform 250ms cubic-bezier(0.2, 0, 0.1, 1);
+}
+.toggle-switch.on::after { transform: translateX(14px); }
+
+/* ── Column resize cursor override (beats any child cursor: pointer) ─────── */
+body.col-resizing, body.col-resizing * { cursor: col-resize !important; }
+
+/* ── Fixed phantom horizontal scrollbar ─────────────────────────────────── */
+.table-scroll-hidden-native {
+  scrollbar-width: none;        /* Firefox */
+  -ms-overflow-style: none;     /* IE / Edge */
+}
+.table-scroll-hidden-native::-webkit-scrollbar { display: none; } /* Chrome / Safari */
+.no-search-chip-scroll::-webkit-scrollbar { display: none; }
+
+.fixed-scrollbar {
+  position: fixed;
+  bottom: 0; /* m2 original: 47px, flush above its 48px GlobalFooter — smart-arb has no GlobalFooter */
+  height: 16px;
+  background: white;
+  border-top: 1px solid #E5E7EB;
+  z-index: 10001;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.fixed-scrollbar-thumb {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 8px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.25);
+  cursor: grab;
+  transition: background 150ms;
+  will-change: transform, width;
+}
+.fixed-scrollbar-thumb:hover  { background: rgba(0, 0, 0, 0.4); }
+.fixed-scrollbar-thumb:active { background: rgba(0, 0, 0, 0.5); cursor: grabbing; }
+
+/* ── Search bar ──────────────────────────────────────────────────────────── */
+.search-bar {
+  outline: 1px solid var(--neutral-50);
+  outline-offset: 0px;
+  transition: outline-color 100ms cubic-bezier(0.2, 0, 0.1, 1);
+}
+.search-bar:hover { outline-color: var(--neutral-100); }
+.search-bar:focus-within { outline: 1.5px solid #C7D3E0; }
+
+.search-clear-btn {
+  background: none;
+  transition: background 100ms cubic-bezier(0.2, 0, 0.1, 1);
+}
+.search-clear-btn:hover { background: #F0F2F5; }
+.search-clear-btn circle { fill: var(--neutral-400); transition: fill 100ms cubic-bezier(0.2, 0, 0.1, 1); }
+.search-clear-btn:hover circle { fill: var(--neutral-700); }
+
+/* ── Table settings button ───────────────────────────────────────────────── */
+.table-settings-btn {
+  outline: 1px solid var(--neutral-50);
+  outline-offset: 0px;
+  transition: outline-color 100ms cubic-bezier(0.2, 0, 0.1, 1);
+}
+.table-settings-btn:hover { outline-color: var(--neutral-100); }
+
+/* ── Table header cell hover ────────────────────────────────────────────── */
+thead th.col-header { background-color: #FFFFFF; cursor: pointer; color: var(--neutral-600); transition: color 150ms cubic-bezier(0.2, 0, 0.1, 1); border-bottom: 1px solid var(--neutral-50); }
+thead th.col-header:hover { color: var(--neutral-900); }
+.no-row-hover thead th.col-header:hover { color: var(--neutral-600); }
+
+/* ── First data column: no left padding (butts against checkbox) ───────── */
+.data-table tbody tr td:nth-child(2) { padding-left: 0; }
+.data-table thead tr th:nth-child(2) { padding-left: 0; }
+
+/* ── More icon visibility ───────────────────────────────────────────────── */
+.more-icon-container {
+  display: flex;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 100ms cubic-bezier(0.2, 0, 0.1, 1);
+}
+tbody tr.row-hoverable:hover .more-icon-container,
+tbody tr.row-force-hover .more-icon-container             { opacity: 1; pointer-events: auto; }
+.no-row-hover tbody tr.row-hoverable:hover .more-icon-container { opacity: 0; pointer-events: none; }
+
+/* ── Data cell vertical padding — rows size to content, min-height from tr ── */
+td[data-col-id] { padding-top: 8px; padding-bottom: 8px; vertical-align: middle; }
+
+/* ── Link icon and copy icon (M1.5 columns) ─────────────────────────────── */
+.link-icon  { opacity: 0; transform: scale(0.95); transition: none; flex-shrink: 0; }
+.copy-icon  { opacity: 0; transform: scale(0.95); transition: none; flex-shrink: 0; padding: 2px; }
+tbody tr.row-hoverable:hover .link-icon,
+tbody tr.row-force-hover .link-icon  { opacity: 1; transform: scale(1); }
+tbody tr.row-hoverable:hover .copy-icon,
+tbody tr.row-force-hover .copy-icon  { opacity: 1; transform: scale(1); }
+.no-row-hover tbody tr.row-hoverable:hover .link-icon { opacity: 0; transform: scale(0.95); }
+.no-row-hover tbody tr.row-hoverable:hover .copy-icon { opacity: 0; transform: scale(0.95); }

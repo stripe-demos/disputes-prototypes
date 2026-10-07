@@ -10,6 +10,7 @@ export { default as Dialog } from './Dialog';
 export { default as Input, FormField, Textarea, Select, Checkbox, Radio } from './Input';
 export { default as KeyValuePair } from './KeyValuePair';
 export { default as Link } from './Link';
+export { default as SegmentedControl } from './SegmentedControl';
 export { default as SelectDropdown } from './SelectDropdown';
 export { default as Switch } from './Switch';
 export { default as Table } from './Table';

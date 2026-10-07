@@ -143,6 +143,25 @@
   --color-chart-9: #3da00b;
 }
 
+/* Cloned m2 listview engine references the neutral scale as bare
+   --neutral-N custom properties (not Tailwind's --color-neutral-N theme
+   tokens) — alias them so outlines/borders throughout ListViewTemplate.tsx
+   resolve instead of silently falling back to an invalid/transparent value. */
+:root {
+  --neutral-0: var(--color-neutral-0);
+  --neutral-25: var(--color-neutral-25);
+  --neutral-50: var(--color-neutral-50);
+  --neutral-100: var(--color-neutral-100);
+  --neutral-200: var(--color-neutral-200);
+  --neutral-300: var(--color-neutral-300);
+  --neutral-400: var(--color-neutral-400);
+  --neutral-500: var(--color-neutral-500);
+  --neutral-600: var(--color-neutral-600);
+  --neutral-700: var(--color-neutral-700);
+  --neutral-800: var(--color-neutral-800);
+  --neutral-900: var(--color-neutral-900);
+}
+
 /* Dark mode overrides */
 .dark {
   /* Neutral scale */

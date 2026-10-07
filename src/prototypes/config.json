@@ -10,5 +10,10 @@
     "description": "Prototype Stripe docs pages using Markdoc",
     "status": "idea",
     "hidden": true
+  },
+  "smart-arb": {
+    "name": "Smart Arb",
+    "description": "Smart Arb prototype for Thursday review",
+    "status": "idea"
   }
 }

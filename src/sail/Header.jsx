@@ -31,9 +31,9 @@ export const HeaderButton = ({ children, className = '', ...props }) => (
   </button>
 );
 
-export const Header = ({ sandboxMode = false, onMenuToggle, children }) => {
+export const Header = ({ sandboxMode = false, topOffset = 0, contained = false, onMenuToggle, children }) => {
   return (
-    <div className={`fixed left-0 lg:left-sidebar-width right-0 h-[60px] bg-surface border-border z-10 ${sandboxMode ? 'rounded-tl-xl lg:rounded-tl-none rounded-tr-xl overflow-hidden' : ''}`} style={{ top: sandboxMode ? SANDBOX_HEIGHT : 0 }}>
+    <div className={`${contained ? 'absolute' : 'fixed'} left-0 lg:left-sidebar-width right-0 h-[60px] bg-surface border-border z-10 ${sandboxMode ? 'rounded-tl-xl lg:rounded-tl-none rounded-tr-xl overflow-hidden' : ''}`} style={{ top: (sandboxMode ? SANDBOX_HEIGHT : 0) + topOffset }}>
       <div className="max-w-[1280px] w-full h-full mx-auto px-4 lg:px-8 flex items-center justify-between">
         {/* Menu button + account name (mobile only) */}
         <button className="flex lg:hidden items-center gap-2 shrink-0 px-2 py-1.5 -ml-2 rounded-lg hover:bg-offset transition-colors cursor-pointer" onClick={onMenuToggle}>

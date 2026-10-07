@@ -1,0 +1,3740 @@
+{
+  "dataset": {
+    "name": "Dashboard Disputes representative prototype data",
+    "version": "1.0.0",
+    "generated_at": "2026-09-29T04:38:00Z",
+    "record_count": 50,
+    "mode": "synthetic_test_data",
+    "amount_unit": "smallest_currency_unit",
+    "timestamp_format": "ISO 8601 UTC",
+    "disclaimer": "All people, IDs, emails, IP addresses, files, and transactions are fictional. This is Dashboard-oriented prototype data, not an exact Stripe API response schema.",
+    "status_enums": [
+      "warning_needs_response",
+      "warning_under_review",
+      "warning_closed",
+      "needs_response",
+      "under_review",
+      "won",
+      "lost"
+    ],
+    "reason_enums": [
+      "fraudulent",
+      "unrecognized",
+      "product_not_received",
+      "product_unacceptable",
+      "duplicate",
+      "credit_not_processed",
+      "subscription_canceled",
+      "general",
+      "customer_initiated",
+      "debit_not_authorized",
+      "bank_cannot_process",
+      "check_returned",
+      "incorrect_account_details",
+      "insufficient_funds",
+      "noncompliant"
+    ]
+  },
+  "disputes": [
+    {
+      "id": "du_proto_001",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-09-26T03:38:00Z",
+      "status": "needs_response",
+      "display_status": "Needs Response",
+      "actionability": "respond",
+      "reason": "fraudulent",
+      "amount": 2499,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_001",
+        "charge_id": "ch_proto_001",
+        "payment_id": null,
+        "created_at": "2026-09-24T03:38:00Z",
+        "amount": 2499,
+        "currency": "usd",
+        "description": "Canvas travel backpack"
+      },
+      "customer": {
+        "id": "cus_proto_001",
+        "name": "Jordan Smith",
+        "email": "prototype.customer01@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "mastercard",
+          "last4": "1073",
+          "funding": "credit",
+          "country": "US",
+          "wallet": null,
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-10-04T03:38:00Z",
+        "past_due": false,
+        "has_evidence": false,
+        "has_staged_evidence": false,
+        "submission_count": 0,
+        "submission_method": "not_submitted",
+        "submitted_at": null
+      },
+      "evidence": {
+        "fields": {},
+        "files": []
+      },
+      "smart_disputes": {
+        "status": "requires_evidence",
+        "recommended_evidence": [
+          "customer_communication",
+          "customer_signature",
+          "customer_purchase_ip"
+        ]
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0001",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_002",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-09-23T02:38:00Z",
+      "status": "needs_response",
+      "display_status": "Needs Response",
+      "actionability": "respond",
+      "reason": "unrecognized",
+      "amount": 3999,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_002",
+        "charge_id": "ch_proto_002",
+        "payment_id": null,
+        "created_at": "2026-09-20T02:38:00Z",
+        "amount": 3999,
+        "currency": "usd",
+        "description": "Wireless desk lamp"
+      },
+      "customer": {
+        "id": "cus_proto_002",
+        "name": "Morgan Nguyen",
+        "email": "prototype.customer02@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "amex",
+          "last4": "1146",
+          "funding": "credit",
+          "country": "GB",
+          "wallet": "apple_pay",
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-10-02T02:38:00Z",
+        "past_due": false,
+        "has_evidence": false,
+        "has_staged_evidence": false,
+        "submission_count": 0,
+        "submission_method": "not_submitted",
+        "submitted_at": null
+      },
+      "evidence": {
+        "fields": {},
+        "files": []
+      },
+      "smart_disputes": {
+        "status": "processing",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0002",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_003",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-09-20T01:38:00Z",
+      "status": "needs_response",
+      "display_status": "Needs Response",
+      "actionability": "respond",
+      "reason": "product_not_received",
+      "amount": 4999,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_003",
+        "charge_id": "ch_proto_003",
+        "payment_id": null,
+        "created_at": "2026-09-16T01:38:00Z",
+        "amount": 4999,
+        "currency": "usd",
+        "description": "Online design workshop"
+      },
+      "customer": {
+        "id": "cus_proto_003",
+        "name": "Riley Clark",
+        "email": "prototype.customer03@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "discover",
+          "last4": "1219",
+          "funding": "credit",
+          "country": "CA",
+          "wallet": "google_pay",
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-09-30T01:38:00Z",
+        "past_due": false,
+        "has_evidence": true,
+        "has_staged_evidence": true,
+        "submission_count": 0,
+        "submission_method": "not_submitted",
+        "submitted_at": null
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Online design workshop",
+          "customer_email_address": "prototype.customer03@example.test",
+          "shipping_carrier": "UPS",
+          "shipping_tracking_number": "1ZTEST0000000003"
+        },
+        "files": [
+          {
+            "id": "file_proto_003",
+            "type": "receipt",
+            "filename": "receipt-003.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0003",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_004",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-09-17T00:38:00Z",
+      "status": "needs_response",
+      "display_status": "Needs Response",
+      "actionability": "respond",
+      "reason": "product_unacceptable",
+      "amount": 7500,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_004",
+        "charge_id": "ch_proto_004",
+        "payment_id": null,
+        "created_at": "2026-09-12T00:38:00Z",
+        "amount": 10000,
+        "currency": "usd",
+        "description": "Ceramic dinnerware set"
+      },
+      "customer": {
+        "id": "cus_proto_004",
+        "name": "Casey Garcia",
+        "email": "prototype.customer04@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "visa",
+          "last4": "1292",
+          "funding": "debit",
+          "country": "AU",
+          "wallet": null,
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-10-04T04:38:00Z",
+        "past_due": false,
+        "has_evidence": false,
+        "has_staged_evidence": false,
+        "submission_count": 0,
+        "submission_method": "not_submitted",
+        "submitted_at": null
+      },
+      "evidence": {
+        "fields": {},
+        "files": []
+      },
+      "smart_disputes": {
+        "status": "available",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0004",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_005",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-09-13T23:38:00Z",
+      "status": "needs_response",
+      "display_status": "Needs Response",
+      "actionability": "respond",
+      "reason": "duplicate",
+      "amount": 9900,
+      "currency": "usd",
+      "is_charge_refundable": true,
+      "payment": {
+        "payment_intent_id": "pi_proto_005",
+        "charge_id": "ch_proto_005",
+        "payment_id": null,
+        "created_at": "2026-09-07T23:38:00Z",
+        "amount": 9900,
+        "currency": "usd",
+        "description": "Monthly meal plan"
+      },
+      "customer": {
+        "id": "cus_proto_005",
+        "name": "Taylor Brown",
+        "email": "prototype.customer05@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "mastercard",
+          "last4": "1365",
+          "funding": "credit",
+          "country": "DE",
+          "wallet": null,
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-10-05T04:38:00Z",
+        "past_due": false,
+        "has_evidence": false,
+        "has_staged_evidence": false,
+        "submission_count": 0,
+        "submission_method": "not_submitted",
+        "submitted_at": null
+      },
+      "evidence": {
+        "fields": {},
+        "files": []
+      },
+      "smart_disputes": {
+        "status": "requires_evidence",
+        "recommended_evidence": [
+          "duplicate_charge_id",
+          "duplicate_charge_explanation",
+          "duplicate_charge_documentation"
+        ]
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0005",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_006",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-09-10T22:38:00Z",
+      "status": "needs_response",
+      "display_status": "Needs Response",
+      "actionability": "respond",
+      "reason": "credit_not_processed",
+      "amount": 12500,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_006",
+        "charge_id": "ch_proto_006",
+        "payment_id": null,
+        "created_at": "2026-09-03T22:38:00Z",
+        "amount": 12500,
+        "currency": "usd",
+        "description": "Running shoes"
+      },
+      "customer": {
+        "id": "cus_proto_006",
+        "name": "Jamie Martin",
+        "email": "prototype.customer06@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "amex",
+          "last4": "1438",
+          "funding": "credit",
+          "country": "US",
+          "wallet": "apple_pay",
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-10-06T04:38:00Z",
+        "past_due": false,
+        "has_evidence": true,
+        "has_staged_evidence": true,
+        "submission_count": 0,
+        "submission_method": "not_submitted",
+        "submitted_at": null
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Running shoes",
+          "customer_email_address": "prototype.customer06@example.test",
+          "customer_communication": "Synthetic customer correspondence for prototype testing."
+        },
+        "files": [
+          {
+            "id": "file_proto_006",
+            "type": "receipt",
+            "filename": "receipt-006.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "processing",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0006",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_007",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-09-07T21:38:00Z",
+      "status": "needs_response",
+      "display_status": "Needs Response",
+      "actionability": "respond",
+      "reason": "subscription_canceled",
+      "amount": 18000,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_007",
+        "charge_id": "ch_proto_007",
+        "payment_id": null,
+        "created_at": "2026-08-30T21:38:00Z",
+        "amount": 18000,
+        "currency": "usd",
+        "description": "Cloud storage subscription"
+      },
+      "customer": {
+        "id": "cus_proto_007",
+        "name": "Drew Patel",
+        "email": "prototype.customer07@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "discover",
+          "last4": "1511",
+          "funding": "credit",
+          "country": "US",
+          "wallet": "google_pay",
+          "three_d_secure": "authenticated"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-10-07T04:38:00Z",
+        "past_due": false,
+        "has_evidence": false,
+        "has_staged_evidence": false,
+        "submission_count": 0,
+        "submission_method": "not_submitted",
+        "submitted_at": null
+      },
+      "evidence": {
+        "fields": {},
+        "files": []
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "visa_ce_3_0_eligible",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0007",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_008",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-09-04T20:38:00Z",
+      "status": "needs_response",
+      "display_status": "Needs Response",
+      "actionability": "respond",
+      "reason": "general",
+      "amount": 24900,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_008",
+        "charge_id": "ch_proto_008",
+        "payment_id": null,
+        "created_at": "2026-08-26T20:38:00Z",
+        "amount": 27400,
+        "currency": "usd",
+        "description": "Concert tickets"
+      },
+      "customer": {
+        "id": "cus_proto_008",
+        "name": "Cameron Kim",
+        "email": "prototype.customer08@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "visa",
+          "last4": "1584",
+          "funding": "debit",
+          "country": "GB",
+          "wallet": null,
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-09-30T04:38:00Z",
+        "past_due": false,
+        "has_evidence": false,
+        "has_staged_evidence": false,
+        "submission_count": 0,
+        "submission_method": "not_submitted",
+        "submitted_at": null
+      },
+      "evidence": {
+        "fields": {},
+        "files": []
+      },
+      "smart_disputes": {
+        "status": "available",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0008",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_009",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-09-01T19:38:00Z",
+      "status": "needs_response",
+      "display_status": "Needs Response",
+      "actionability": "respond",
+      "reason": "customer_initiated",
+      "amount": 49900,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_009",
+        "charge_id": "ch_proto_009",
+        "payment_id": null,
+        "created_at": "2026-08-22T19:38:00Z",
+        "amount": 49900,
+        "currency": "usd",
+        "description": "Coffee grinder"
+      },
+      "customer": {
+        "id": "cus_proto_009",
+        "name": "Quinn Wilson",
+        "email": "prototype.customer09@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "mastercard",
+          "last4": "1657",
+          "funding": "credit",
+          "country": "CA",
+          "wallet": null,
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-10-01T04:38:00Z",
+        "past_due": false,
+        "has_evidence": true,
+        "has_staged_evidence": true,
+        "submission_count": 0,
+        "submission_method": "not_submitted",
+        "submitted_at": null
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Coffee grinder",
+          "customer_email_address": "prototype.customer09@example.test",
+          "customer_communication": "Synthetic customer correspondence for prototype testing."
+        },
+        "files": [
+          {
+            "id": "file_proto_009",
+            "type": "receipt",
+            "filename": "receipt-009.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "requires_evidence",
+        "recommended_evidence": [
+          "receipt",
+          "customer_communication"
+        ]
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0009",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_010",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-08-29T18:38:00Z",
+      "status": "needs_response",
+      "display_status": "Needs Response",
+      "actionability": "respond",
+      "reason": "debit_not_authorized",
+      "amount": 1299,
+      "currency": "usd",
+      "is_charge_refundable": true,
+      "payment": {
+        "payment_intent_id": "pi_proto_010",
+        "charge_id": "ch_proto_010",
+        "payment_id": null,
+        "created_at": "2026-08-18T18:38:00Z",
+        "amount": 1299,
+        "currency": "usd",
+        "description": "Annual analytics subscription"
+      },
+      "customer": {
+        "id": "cus_proto_010",
+        "name": "Avery Lee",
+        "email": "prototype.customer10@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "amex",
+          "last4": "1730",
+          "funding": "credit",
+          "country": "AU",
+          "wallet": "apple_pay",
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-10-02T04:38:00Z",
+        "past_due": false,
+        "has_evidence": false,
+        "has_staged_evidence": false,
+        "submission_count": 0,
+        "submission_method": "not_submitted",
+        "submitted_at": null
+      },
+      "evidence": {
+        "fields": {},
+        "files": []
+      },
+      "smart_disputes": {
+        "status": "processing",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0010",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_011",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-08-26T17:38:00Z",
+      "status": "needs_response",
+      "display_status": "Needs Response",
+      "actionability": "respond",
+      "reason": "bank_cannot_process",
+      "amount": 2499,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_011",
+        "charge_id": "ch_proto_011",
+        "payment_id": null,
+        "created_at": "2026-08-14T17:38:00Z",
+        "amount": 2499,
+        "currency": "usd",
+        "description": "Canvas travel backpack"
+      },
+      "customer": {
+        "id": "cus_proto_011",
+        "name": "Jordan Smith",
+        "email": "prototype.customer11@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "discover",
+          "last4": "1803",
+          "funding": "credit",
+          "country": "DE",
+          "wallet": "google_pay",
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-10-03T04:38:00Z",
+        "past_due": false,
+        "has_evidence": false,
+        "has_staged_evidence": false,
+        "submission_count": 0,
+        "submission_method": "not_submitted",
+        "submitted_at": null
+      },
+      "evidence": {
+        "fields": {},
+        "files": []
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0011",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "pdp_proto_012",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-08-23T16:38:00Z",
+      "status": "needs_response",
+      "display_status": "Needs Response",
+      "actionability": "respond",
+      "reason": "check_returned",
+      "amount": 3999,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_012",
+        "charge_id": null,
+        "payment_id": "py_proto_012",
+        "created_at": "2026-08-22T16:38:00Z",
+        "amount": 6499,
+        "currency": "usd",
+        "description": "Wireless desk lamp"
+      },
+      "customer": {
+        "id": "cus_proto_012",
+        "name": "Morgan Nguyen",
+        "email": "prototype.customer12@example.test"
+      },
+      "payment_method": {
+        "type": "klarna",
+        "card": null
+      },
+      "evidence_details": {
+        "due_by": "2026-10-04T04:38:00Z",
+        "past_due": false,
+        "has_evidence": true,
+        "has_staged_evidence": true,
+        "submission_count": 0,
+        "submission_method": "not_submitted",
+        "submitted_at": null
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Wireless desk lamp",
+          "customer_email_address": "prototype.customer12@example.test",
+          "customer_communication": "Synthetic customer correspondence for prototype testing."
+        },
+        "files": [
+          {
+            "id": "file_proto_012",
+            "type": "receipt",
+            "filename": "receipt-012.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "available",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "bnpl_payment_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0012",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_013",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-08-20T15:38:00Z",
+      "status": "needs_response",
+      "display_status": "Needs Response",
+      "actionability": "respond",
+      "reason": "incorrect_account_details",
+      "amount": 4999,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_013",
+        "charge_id": "ch_proto_013",
+        "payment_id": null,
+        "created_at": "2026-08-18T15:38:00Z",
+        "amount": 4999,
+        "currency": "usd",
+        "description": "Online design workshop"
+      },
+      "customer": {
+        "id": "cus_proto_013",
+        "name": "Riley Clark",
+        "email": "prototype.customer13@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "mastercard",
+          "last4": "1949",
+          "funding": "credit",
+          "country": "US",
+          "wallet": null,
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-10-05T04:38:00Z",
+        "past_due": false,
+        "has_evidence": false,
+        "has_staged_evidence": false,
+        "submission_count": 0,
+        "submission_method": "not_submitted",
+        "submitted_at": null
+      },
+      "evidence": {
+        "fields": {},
+        "files": []
+      },
+      "smart_disputes": {
+        "status": "requires_evidence",
+        "recommended_evidence": [
+          "receipt",
+          "customer_communication"
+        ]
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0013",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "pdp_proto_014",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-08-17T14:38:00Z",
+      "status": "needs_response",
+      "display_status": "Needs Response",
+      "actionability": "respond",
+      "reason": "insufficient_funds",
+      "amount": 7500,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_014",
+        "charge_id": null,
+        "payment_id": "py_proto_014",
+        "created_at": "2026-08-14T14:38:00Z",
+        "amount": 7500,
+        "currency": "usd",
+        "description": "Ceramic dinnerware set"
+      },
+      "customer": {
+        "id": "cus_proto_014",
+        "name": "Casey Garcia",
+        "email": "prototype.customer14@example.test"
+      },
+      "payment_method": {
+        "type": "afterpay_clearpay",
+        "card": null
+      },
+      "evidence_details": {
+        "due_by": "2026-10-06T04:38:00Z",
+        "past_due": false,
+        "has_evidence": false,
+        "has_staged_evidence": false,
+        "submission_count": 0,
+        "submission_method": "not_submitted",
+        "submitted_at": null
+      },
+      "evidence": {
+        "fields": {},
+        "files": []
+      },
+      "smart_disputes": {
+        "status": "processing",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "bnpl_payment_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0014",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_015",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-08-14T13:38:00Z",
+      "status": "needs_response",
+      "display_status": "Needs Response",
+      "actionability": "respond",
+      "reason": "noncompliant",
+      "amount": 9900,
+      "currency": "usd",
+      "is_charge_refundable": true,
+      "payment": {
+        "payment_intent_id": "pi_proto_015",
+        "charge_id": "ch_proto_015",
+        "payment_id": null,
+        "created_at": "2026-08-10T13:38:00Z",
+        "amount": 9900,
+        "currency": "usd",
+        "description": "Monthly meal plan"
+      },
+      "customer": {
+        "id": "cus_proto_015",
+        "name": "Taylor Brown",
+        "email": "prototype.customer15@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "discover",
+          "last4": "2095",
+          "funding": "credit",
+          "country": "CA",
+          "wallet": "google_pay",
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-10-07T04:38:00Z",
+        "past_due": false,
+        "has_evidence": true,
+        "has_staged_evidence": true,
+        "submission_count": 0,
+        "submission_method": "not_submitted",
+        "submitted_at": null
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Monthly meal plan",
+          "customer_email_address": "prototype.customer15@example.test",
+          "customer_communication": "Synthetic customer correspondence for prototype testing."
+        },
+        "files": [
+          {
+            "id": "file_proto_015",
+            "type": "receipt",
+            "filename": "receipt-015.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0015",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_016",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-08-11T12:38:00Z",
+      "status": "under_review",
+      "display_status": "Under Review",
+      "actionability": "awaiting_decision",
+      "reason": "fraudulent",
+      "amount": 12500,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_016",
+        "charge_id": "ch_proto_016",
+        "payment_id": null,
+        "created_at": "2026-08-06T12:38:00Z",
+        "amount": 15000,
+        "currency": "usd",
+        "description": "Running shoes"
+      },
+      "customer": {
+        "id": "cus_proto_016",
+        "name": "Jamie Martin",
+        "email": "prototype.customer16@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "visa",
+          "last4": "2168",
+          "funding": "debit",
+          "country": "AU",
+          "wallet": null,
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-08-24T12:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 1,
+        "submission_method": "manual",
+        "submitted_at": "2026-08-14T12:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Running shoes",
+          "customer_email_address": "prototype.customer16@example.test",
+          "customer_purchase_ip": "192.0.2.17",
+          "customer_communication": "Synthetic order confirmation and account activity record."
+        },
+        "files": [
+          {
+            "id": "file_proto_016",
+            "type": "receipt",
+            "filename": "receipt-016.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0016",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_017",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-08-08T11:38:00Z",
+      "status": "under_review",
+      "display_status": "Under Review",
+      "actionability": "awaiting_decision",
+      "reason": "unrecognized",
+      "amount": 18000,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_017",
+        "charge_id": "ch_proto_017",
+        "payment_id": null,
+        "created_at": "2026-08-02T11:38:00Z",
+        "amount": 18000,
+        "currency": "usd",
+        "description": "Cloud storage subscription"
+      },
+      "customer": {
+        "id": "cus_proto_017",
+        "name": "Drew Patel",
+        "email": "prototype.customer17@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "mastercard",
+          "last4": "2241",
+          "funding": "credit",
+          "country": "DE",
+          "wallet": null,
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-08-22T11:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 2,
+        "submission_method": "manual",
+        "submitted_at": "2026-08-12T11:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Cloud storage subscription",
+          "customer_email_address": "prototype.customer17@example.test",
+          "customer_purchase_ip": "192.0.2.18",
+          "customer_communication": "Synthetic order confirmation and account activity record."
+        },
+        "files": [
+          {
+            "id": "file_proto_017",
+            "type": "receipt",
+            "filename": "receipt-017.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0017",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_018",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-08-05T10:38:00Z",
+      "status": "under_review",
+      "display_status": "Under Review",
+      "actionability": "awaiting_decision",
+      "reason": "product_not_received",
+      "amount": 24900,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_018",
+        "charge_id": "ch_proto_018",
+        "payment_id": null,
+        "created_at": "2026-07-29T10:38:00Z",
+        "amount": 24900,
+        "currency": "usd",
+        "description": "Concert tickets"
+      },
+      "customer": {
+        "id": "cus_proto_018",
+        "name": "Cameron Kim",
+        "email": "prototype.customer18@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "amex",
+          "last4": "2314",
+          "funding": "credit",
+          "country": "US",
+          "wallet": "apple_pay",
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-08-20T10:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 1,
+        "submission_method": "smart_disputes",
+        "submitted_at": "2026-08-10T10:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Concert tickets",
+          "customer_email_address": "prototype.customer18@example.test",
+          "shipping_carrier": "UPS",
+          "shipping_tracking_number": "1ZTEST0000000018"
+        },
+        "files": [
+          {
+            "id": "file_proto_018",
+            "type": "receipt",
+            "filename": "receipt-018.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "available",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0018",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_019",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-08-02T09:38:00Z",
+      "status": "under_review",
+      "display_status": "Under Review",
+      "actionability": "awaiting_decision",
+      "reason": "product_unacceptable",
+      "amount": 49900,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_019",
+        "charge_id": "ch_proto_019",
+        "payment_id": null,
+        "created_at": "2026-07-25T09:38:00Z",
+        "amount": 49900,
+        "currency": "usd",
+        "description": "Coffee grinder"
+      },
+      "customer": {
+        "id": "cus_proto_019",
+        "name": "Quinn Wilson",
+        "email": "prototype.customer19@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "discover",
+          "last4": "2387",
+          "funding": "credit",
+          "country": "US",
+          "wallet": "google_pay",
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-08-18T09:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 1,
+        "submission_method": "manual",
+        "submitted_at": "2026-08-08T09:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Coffee grinder",
+          "customer_email_address": "prototype.customer19@example.test",
+          "customer_communication": "Synthetic customer correspondence for prototype testing."
+        },
+        "files": [
+          {
+            "id": "file_proto_019",
+            "type": "receipt",
+            "filename": "receipt-019.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0019",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_020",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-07-31T04:38:00Z",
+      "status": "under_review",
+      "display_status": "Under Review",
+      "actionability": "awaiting_decision",
+      "reason": "duplicate",
+      "amount": 1299,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_020",
+        "charge_id": "ch_proto_020",
+        "payment_id": null,
+        "created_at": "2026-07-22T04:38:00Z",
+        "amount": 3799,
+        "currency": "usd",
+        "description": "Annual analytics subscription"
+      },
+      "customer": {
+        "id": "cus_proto_020",
+        "name": "Avery Lee",
+        "email": "prototype.customer20@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "visa",
+          "last4": "2460",
+          "funding": "debit",
+          "country": "GB",
+          "wallet": null,
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-08-07T04:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 1,
+        "submission_method": "manual",
+        "submitted_at": "2026-08-02T04:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Annual analytics subscription",
+          "customer_email_address": "prototype.customer20@example.test",
+          "duplicate_charge_id": "ch_proto_019",
+          "duplicate_charge_explanation": "Only one purchase was intended."
+        },
+        "files": [
+          {
+            "id": "file_proto_020",
+            "type": "receipt",
+            "filename": "receipt-020.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "multiple_disputes_same_payment",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0020",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_021",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-07-28T03:38:00Z",
+      "status": "under_review",
+      "display_status": "Under Review",
+      "actionability": "awaiting_decision",
+      "reason": "credit_not_processed",
+      "amount": 2499,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_020",
+        "charge_id": "ch_proto_020",
+        "payment_id": null,
+        "created_at": "2026-07-18T03:38:00Z",
+        "amount": 2499,
+        "currency": "usd",
+        "description": "Canvas travel backpack"
+      },
+      "customer": {
+        "id": "cus_proto_021",
+        "name": "Jordan Smith",
+        "email": "prototype.customer21@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "mastercard",
+          "last4": "2533",
+          "funding": "credit",
+          "country": "CA",
+          "wallet": null,
+          "three_d_secure": "authenticated"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-08-05T03:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 1,
+        "submission_method": "smart_disputes",
+        "submitted_at": "2026-07-31T03:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Canvas travel backpack",
+          "customer_email_address": "prototype.customer21@example.test",
+          "customer_communication": "Synthetic customer correspondence for prototype testing."
+        },
+        "files": [
+          {
+            "id": "file_proto_021",
+            "type": "receipt",
+            "filename": "receipt-021.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "available",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "multiple_disputes_same_payment",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0021",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_022",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-07-25T02:38:00Z",
+      "status": "under_review",
+      "display_status": "Under Review",
+      "actionability": "awaiting_decision",
+      "reason": "subscription_canceled",
+      "amount": 3999,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_022",
+        "charge_id": "ch_proto_022",
+        "payment_id": null,
+        "created_at": "2026-07-14T02:38:00Z",
+        "amount": 3999,
+        "currency": "usd",
+        "description": "Wireless desk lamp"
+      },
+      "customer": {
+        "id": "cus_proto_022",
+        "name": "Morgan Nguyen",
+        "email": "prototype.customer22@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "amex",
+          "last4": "2606",
+          "funding": "credit",
+          "country": "AU",
+          "wallet": "apple_pay",
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-08-03T02:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 1,
+        "submission_method": "manual",
+        "submitted_at": "2026-07-29T02:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Wireless desk lamp",
+          "customer_email_address": "prototype.customer22@example.test",
+          "cancellation_policy": "Cancel any time before renewal.",
+          "cancellation_rebuttal": "Service remained available through the paid term."
+        },
+        "files": [
+          {
+            "id": "file_proto_022",
+            "type": "receipt",
+            "filename": "receipt-022.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0022",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_023",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-07-22T01:38:00Z",
+      "status": "under_review",
+      "display_status": "Under Review",
+      "actionability": "awaiting_decision",
+      "reason": "general",
+      "amount": 4999,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_023",
+        "charge_id": "ch_proto_023",
+        "payment_id": null,
+        "created_at": "2026-07-10T01:38:00Z",
+        "amount": 4999,
+        "currency": "usd",
+        "description": "Online design workshop"
+      },
+      "customer": {
+        "id": "cus_proto_023",
+        "name": "Riley Clark",
+        "email": "prototype.customer23@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "discover",
+          "last4": "2679",
+          "funding": "credit",
+          "country": "DE",
+          "wallet": "google_pay",
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-08-01T01:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 1,
+        "submission_method": "manual",
+        "submitted_at": "2026-07-27T01:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Online design workshop",
+          "customer_email_address": "prototype.customer23@example.test",
+          "customer_communication": "Synthetic customer correspondence for prototype testing."
+        },
+        "files": [
+          {
+            "id": "file_proto_023",
+            "type": "receipt",
+            "filename": "receipt-023.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0023",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_024",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-07-19T00:38:00Z",
+      "status": "under_review",
+      "display_status": "Under Review",
+      "actionability": "awaiting_decision",
+      "reason": "customer_initiated",
+      "amount": 7500,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_024",
+        "charge_id": "ch_proto_024",
+        "payment_id": null,
+        "created_at": "2026-07-18T00:38:00Z",
+        "amount": 10000,
+        "currency": "usd",
+        "description": "Ceramic dinnerware set"
+      },
+      "customer": {
+        "id": "cus_proto_024",
+        "name": "Casey Garcia",
+        "email": "prototype.customer24@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "visa",
+          "last4": "2752",
+          "funding": "debit",
+          "country": "US",
+          "wallet": null,
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-07-30T00:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 1,
+        "submission_method": "smart_disputes",
+        "submitted_at": "2026-07-25T00:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Ceramic dinnerware set",
+          "customer_email_address": "prototype.customer24@example.test",
+          "customer_communication": "Synthetic customer correspondence for prototype testing."
+        },
+        "files": [
+          {
+            "id": "file_proto_024",
+            "type": "receipt",
+            "filename": "receipt-024.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "available",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0024",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_025",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-07-15T23:38:00Z",
+      "status": "under_review",
+      "display_status": "Under Review",
+      "actionability": "awaiting_decision",
+      "reason": "debit_not_authorized",
+      "amount": 9900,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_025",
+        "charge_id": "ch_proto_025",
+        "payment_id": null,
+        "created_at": "2026-07-13T23:38:00Z",
+        "amount": 9900,
+        "currency": "usd",
+        "description": "Monthly meal plan"
+      },
+      "customer": {
+        "id": "cus_proto_025",
+        "name": "Taylor Brown",
+        "email": "prototype.customer25@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "mastercard",
+          "last4": "2825",
+          "funding": "credit",
+          "country": "US",
+          "wallet": null,
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-07-27T23:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 1,
+        "submission_method": "manual",
+        "submitted_at": "2026-07-17T23:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Monthly meal plan",
+          "customer_email_address": "prototype.customer25@example.test",
+          "customer_communication": "Synthetic customer correspondence for prototype testing."
+        },
+        "files": [
+          {
+            "id": "file_proto_025",
+            "type": "receipt",
+            "filename": "receipt-025.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0025",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_026",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-07-12T22:38:00Z",
+      "status": "won",
+      "display_status": "Won",
+      "actionability": "none",
+      "reason": "bank_cannot_process",
+      "amount": 12500,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_026",
+        "charge_id": "ch_proto_026",
+        "payment_id": null,
+        "created_at": "2026-07-09T22:38:00Z",
+        "amount": 12500,
+        "currency": "usd",
+        "description": "Running shoes"
+      },
+      "customer": {
+        "id": "cus_proto_026",
+        "name": "Jamie Martin",
+        "email": "prototype.customer26@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "amex",
+          "last4": "2898",
+          "funding": "credit",
+          "country": "GB",
+          "wallet": "apple_pay",
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-07-25T22:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 1,
+        "submission_method": "manual",
+        "submitted_at": "2026-07-15T22:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Running shoes",
+          "customer_email_address": "prototype.customer26@example.test",
+          "customer_communication": "Synthetic customer correspondence for prototype testing."
+        },
+        "files": [
+          {
+            "id": "file_proto_026",
+            "type": "receipt",
+            "filename": "receipt-026.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": "won",
+        "resolved_at": "2026-08-17T22:38:00Z",
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0026",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "pdp_proto_027",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-07-09T21:38:00Z",
+      "status": "won",
+      "display_status": "Won",
+      "actionability": "none",
+      "reason": "check_returned",
+      "amount": 18000,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_027",
+        "charge_id": null,
+        "payment_id": "py_proto_027",
+        "created_at": "2026-07-05T21:38:00Z",
+        "amount": 18000,
+        "currency": "usd",
+        "description": "Cloud storage subscription"
+      },
+      "customer": {
+        "id": "cus_proto_027",
+        "name": "Drew Patel",
+        "email": "prototype.customer27@example.test"
+      },
+      "payment_method": {
+        "type": "klarna",
+        "card": null
+      },
+      "evidence_details": {
+        "due_by": "2026-07-23T21:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 1,
+        "submission_method": "smart_disputes",
+        "submitted_at": "2026-07-13T21:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Cloud storage subscription",
+          "customer_email_address": "prototype.customer27@example.test",
+          "customer_communication": "Synthetic customer correspondence for prototype testing."
+        },
+        "files": [
+          {
+            "id": "file_proto_027",
+            "type": "receipt",
+            "filename": "receipt-027.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "available",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": "won",
+        "resolved_at": "2026-08-15T21:38:00Z",
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "bnpl_payment_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0027",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_028",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-07-06T20:38:00Z",
+      "status": "won",
+      "display_status": "Won",
+      "actionability": "none",
+      "reason": "incorrect_account_details",
+      "amount": 24900,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_028",
+        "charge_id": "ch_proto_028",
+        "payment_id": null,
+        "created_at": "2026-07-01T20:38:00Z",
+        "amount": 27400,
+        "currency": "usd",
+        "description": "Concert tickets"
+      },
+      "customer": {
+        "id": "cus_proto_028",
+        "name": "Cameron Kim",
+        "email": "prototype.customer28@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "visa",
+          "last4": "3044",
+          "funding": "debit",
+          "country": "AU",
+          "wallet": null,
+          "three_d_secure": "authenticated"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-07-21T20:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 1,
+        "submission_method": "manual",
+        "submitted_at": "2026-07-11T20:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Concert tickets",
+          "customer_email_address": "prototype.customer28@example.test",
+          "customer_communication": "Synthetic customer correspondence for prototype testing."
+        },
+        "files": [
+          {
+            "id": "file_proto_028",
+            "type": "receipt",
+            "filename": "receipt-028.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": "won",
+        "resolved_at": "2026-08-13T20:38:00Z",
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0028",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_029",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-07-03T19:38:00Z",
+      "status": "won",
+      "display_status": "Won",
+      "actionability": "none",
+      "reason": "insufficient_funds",
+      "amount": 49900,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_029",
+        "charge_id": "ch_proto_029",
+        "payment_id": null,
+        "created_at": "2026-06-27T19:38:00Z",
+        "amount": 49900,
+        "currency": "usd",
+        "description": "Coffee grinder"
+      },
+      "customer": {
+        "id": "cus_proto_029",
+        "name": "Quinn Wilson",
+        "email": "prototype.customer29@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "mastercard",
+          "last4": "3117",
+          "funding": "credit",
+          "country": "DE",
+          "wallet": null,
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-07-19T19:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 1,
+        "submission_method": "manual",
+        "submitted_at": "2026-07-09T19:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Coffee grinder",
+          "customer_email_address": "prototype.customer29@example.test",
+          "customer_communication": "Synthetic customer correspondence for prototype testing."
+        },
+        "files": [
+          {
+            "id": "file_proto_029",
+            "type": "receipt",
+            "filename": "receipt-029.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": "won",
+        "resolved_at": "2026-08-11T19:38:00Z",
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0029",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_030",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-06-30T18:38:00Z",
+      "status": "won",
+      "display_status": "Won",
+      "actionability": "none",
+      "reason": "noncompliant",
+      "amount": 1299,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_030",
+        "charge_id": "ch_proto_030",
+        "payment_id": null,
+        "created_at": "2026-06-23T18:38:00Z",
+        "amount": 1299,
+        "currency": "usd",
+        "description": "Annual analytics subscription"
+      },
+      "customer": {
+        "id": "cus_proto_030",
+        "name": "Avery Lee",
+        "email": "prototype.customer30@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "amex",
+          "last4": "3190",
+          "funding": "credit",
+          "country": "US",
+          "wallet": "apple_pay",
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-07-07T18:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 1,
+        "submission_method": "smart_disputes",
+        "submitted_at": "2026-07-02T18:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Annual analytics subscription",
+          "customer_email_address": "prototype.customer30@example.test",
+          "customer_communication": "Synthetic customer correspondence for prototype testing."
+        },
+        "files": [
+          {
+            "id": "file_proto_030",
+            "type": "receipt",
+            "filename": "receipt-030.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "available",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": "won",
+        "resolved_at": "2026-08-09T18:38:00Z",
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0030",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_031",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-06-27T17:38:00Z",
+      "status": "won",
+      "display_status": "Won",
+      "actionability": "none",
+      "reason": "fraudulent",
+      "amount": 2499,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_031",
+        "charge_id": "ch_proto_031",
+        "payment_id": null,
+        "created_at": "2026-06-19T17:38:00Z",
+        "amount": 2499,
+        "currency": "usd",
+        "description": "Canvas travel backpack"
+      },
+      "customer": {
+        "id": "cus_proto_031",
+        "name": "Jordan Smith",
+        "email": "prototype.customer31@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "discover",
+          "last4": "3263",
+          "funding": "credit",
+          "country": "US",
+          "wallet": "google_pay",
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-07-05T17:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 1,
+        "submission_method": "manual",
+        "submitted_at": "2026-06-30T17:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Canvas travel backpack",
+          "customer_email_address": "prototype.customer31@example.test",
+          "customer_purchase_ip": "192.0.2.32",
+          "customer_communication": "Synthetic order confirmation and account activity record."
+        },
+        "files": [
+          {
+            "id": "file_proto_031",
+            "type": "receipt",
+            "filename": "receipt-031.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": "won",
+        "resolved_at": "2026-08-07T17:38:00Z",
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0031",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_032",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-06-24T16:38:00Z",
+      "status": "won",
+      "display_status": "Won",
+      "actionability": "none",
+      "reason": "unrecognized",
+      "amount": 3999,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_032",
+        "charge_id": "ch_proto_032",
+        "payment_id": null,
+        "created_at": "2026-06-15T16:38:00Z",
+        "amount": 6499,
+        "currency": "usd",
+        "description": "Wireless desk lamp"
+      },
+      "customer": {
+        "id": "cus_proto_032",
+        "name": "Morgan Nguyen",
+        "email": "prototype.customer32@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "visa",
+          "last4": "3336",
+          "funding": "debit",
+          "country": "GB",
+          "wallet": null,
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-07-03T16:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 1,
+        "submission_method": "manual",
+        "submitted_at": "2026-06-28T16:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Wireless desk lamp",
+          "customer_email_address": "prototype.customer32@example.test",
+          "customer_purchase_ip": "192.0.2.33",
+          "customer_communication": "Synthetic order confirmation and account activity record."
+        },
+        "files": [
+          {
+            "id": "file_proto_032",
+            "type": "receipt",
+            "filename": "receipt-032.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": "won",
+        "resolved_at": "2026-08-05T16:38:00Z",
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0032",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_033",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-06-21T15:38:00Z",
+      "status": "won",
+      "display_status": "Won",
+      "actionability": "none",
+      "reason": "product_not_received",
+      "amount": 4999,
+      "currency": "usd",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_033",
+        "charge_id": "ch_proto_033",
+        "payment_id": null,
+        "created_at": "2026-06-11T15:38:00Z",
+        "amount": 4999,
+        "currency": "usd",
+        "description": "Online design workshop"
+      },
+      "customer": {
+        "id": "cus_proto_033",
+        "name": "Riley Clark",
+        "email": "prototype.customer33@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "mastercard",
+          "last4": "3409",
+          "funding": "credit",
+          "country": "CA",
+          "wallet": null,
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-07-01T15:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 1,
+        "submission_method": "smart_disputes",
+        "submitted_at": "2026-06-26T15:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Online design workshop",
+          "customer_email_address": "prototype.customer33@example.test",
+          "shipping_carrier": "UPS",
+          "shipping_tracking_number": "1ZTEST0000000033"
+        },
+        "files": [
+          {
+            "id": "file_proto_033",
+            "type": "receipt",
+            "filename": "receipt-033.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "available",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": "won",
+        "resolved_at": "2026-08-03T15:38:00Z",
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0033",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_034",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-06-18T14:38:00Z",
+      "status": "won",
+      "display_status": "Won",
+      "actionability": "none",
+      "reason": "product_unacceptable",
+      "amount": 7500,
+      "currency": "eur",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_034",
+        "charge_id": "ch_proto_034",
+        "payment_id": null,
+        "created_at": "2026-06-07T14:38:00Z",
+        "amount": 7500,
+        "currency": "eur",
+        "description": "Ceramic dinnerware set"
+      },
+      "customer": {
+        "id": "cus_proto_034",
+        "name": "Casey Garcia",
+        "email": "prototype.customer34@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "amex",
+          "last4": "3482",
+          "funding": "credit",
+          "country": "AU",
+          "wallet": "apple_pay",
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-06-29T14:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 2,
+        "submission_method": "manual",
+        "submitted_at": "2026-06-24T14:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Ceramic dinnerware set",
+          "customer_email_address": "prototype.customer34@example.test",
+          "customer_communication": "Synthetic customer correspondence for prototype testing."
+        },
+        "files": [
+          {
+            "id": "file_proto_034",
+            "type": "receipt",
+            "filename": "receipt-034.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": "won",
+        "resolved_at": "2026-08-01T14:38:00Z",
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "arbitration_review",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0034",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_035",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-06-15T13:38:00Z",
+      "status": "lost",
+      "display_status": "Lost",
+      "actionability": "none",
+      "reason": "duplicate",
+      "amount": 9900,
+      "currency": "eur",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_035",
+        "charge_id": "ch_proto_035",
+        "payment_id": null,
+        "created_at": "2026-06-03T13:38:00Z",
+        "amount": 9900,
+        "currency": "eur",
+        "description": "Monthly meal plan"
+      },
+      "customer": {
+        "id": "cus_proto_035",
+        "name": "Taylor Brown",
+        "email": "prototype.customer35@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "discover",
+          "last4": "3555",
+          "funding": "credit",
+          "country": "DE",
+          "wallet": "google_pay",
+          "three_d_secure": "authenticated"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-06-27T13:38:00Z",
+        "past_due": true,
+        "has_evidence": false,
+        "has_staged_evidence": false,
+        "submission_count": 0,
+        "submission_method": "not_submitted",
+        "submitted_at": null
+      },
+      "evidence": {
+        "fields": {},
+        "files": []
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": "lost",
+        "resolved_at": "2026-06-30T13:38:00Z",
+        "loss_reason": "acquirer_reject"
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0035",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_036",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-06-12T12:38:00Z",
+      "status": "lost",
+      "display_status": "Lost",
+      "actionability": "none",
+      "reason": "credit_not_processed",
+      "amount": 12500,
+      "currency": "eur",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_036",
+        "charge_id": "ch_proto_036",
+        "payment_id": null,
+        "created_at": "2026-06-11T12:38:00Z",
+        "amount": 15000,
+        "currency": "eur",
+        "description": "Running shoes"
+      },
+      "customer": {
+        "id": "cus_proto_036",
+        "name": "Jamie Martin",
+        "email": "prototype.customer36@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "visa",
+          "last4": "3628",
+          "funding": "debit",
+          "country": "US",
+          "wallet": null,
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-06-25T12:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 1,
+        "submission_method": "smart_disputes",
+        "submitted_at": "2026-06-15T12:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Running shoes",
+          "customer_email_address": "prototype.customer36@example.test",
+          "customer_communication": "Synthetic customer correspondence for prototype testing."
+        },
+        "files": [
+          {
+            "id": "file_proto_036",
+            "type": "receipt",
+            "filename": "receipt-036.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": "lost",
+        "resolved_at": "2026-06-29T12:38:00Z",
+        "loss_reason": "issuer_decision"
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0036",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_037",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-06-09T11:38:00Z",
+      "status": "lost",
+      "display_status": "Lost",
+      "actionability": "none",
+      "reason": "subscription_canceled",
+      "amount": 18000,
+      "currency": "eur",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_037",
+        "charge_id": "ch_proto_037",
+        "payment_id": null,
+        "created_at": "2026-06-07T11:38:00Z",
+        "amount": 18000,
+        "currency": "eur",
+        "description": "Cloud storage subscription"
+      },
+      "customer": {
+        "id": "cus_proto_037",
+        "name": "Drew Patel",
+        "email": "prototype.customer37@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "mastercard",
+          "last4": "3701",
+          "funding": "credit",
+          "country": "US",
+          "wallet": null,
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-06-23T11:38:00Z",
+        "past_due": true,
+        "has_evidence": false,
+        "has_staged_evidence": false,
+        "submission_count": 0,
+        "submission_method": "not_submitted",
+        "submitted_at": null
+      },
+      "evidence": {
+        "fields": {},
+        "files": []
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": "lost",
+        "resolved_at": "2026-06-28T11:38:00Z",
+        "loss_reason": "incontestable"
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0037",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_038",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-06-06T10:38:00Z",
+      "status": "lost",
+      "display_status": "Lost",
+      "actionability": "none",
+      "reason": "general",
+      "amount": 24900,
+      "currency": "eur",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_038",
+        "charge_id": "ch_proto_038",
+        "payment_id": null,
+        "created_at": "2026-06-03T10:38:00Z",
+        "amount": 24900,
+        "currency": "eur",
+        "description": "Concert tickets"
+      },
+      "customer": {
+        "id": "cus_proto_038",
+        "name": "Cameron Kim",
+        "email": "prototype.customer38@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "amex",
+          "last4": "3774",
+          "funding": "credit",
+          "country": "GB",
+          "wallet": "apple_pay",
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-06-21T10:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 1,
+        "submission_method": "manual",
+        "submitted_at": "2026-06-11T10:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Concert tickets",
+          "customer_email_address": "prototype.customer38@example.test",
+          "customer_communication": "Synthetic customer correspondence for prototype testing."
+        },
+        "files": [
+          {
+            "id": "file_proto_038",
+            "type": "receipt",
+            "filename": "receipt-038.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": "lost",
+        "resolved_at": "2026-06-27T10:38:00Z",
+        "loss_reason": "acquirer_reject"
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0038",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_039",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-06-03T09:38:00Z",
+      "status": "lost",
+      "display_status": "Lost",
+      "actionability": "none",
+      "reason": "customer_initiated",
+      "amount": 49900,
+      "currency": "eur",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_039",
+        "charge_id": "ch_proto_039",
+        "payment_id": null,
+        "created_at": "2026-05-30T09:38:00Z",
+        "amount": 49900,
+        "currency": "eur",
+        "description": "Coffee grinder"
+      },
+      "customer": {
+        "id": "cus_proto_039",
+        "name": "Quinn Wilson",
+        "email": "prototype.customer39@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "discover",
+          "last4": "3847",
+          "funding": "credit",
+          "country": "CA",
+          "wallet": "google_pay",
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-06-19T09:38:00Z",
+        "past_due": true,
+        "has_evidence": false,
+        "has_staged_evidence": false,
+        "submission_count": 0,
+        "submission_method": "not_submitted",
+        "submitted_at": null
+      },
+      "evidence": {
+        "fields": {},
+        "files": []
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": "lost",
+        "resolved_at": "2026-06-26T09:38:00Z",
+        "loss_reason": "issuer_decision"
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0039",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_040",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-06-01T04:38:00Z",
+      "status": "lost",
+      "display_status": "Lost",
+      "actionability": "none",
+      "reason": "debit_not_authorized",
+      "amount": 1299,
+      "currency": "gbp",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_040",
+        "charge_id": "ch_proto_040",
+        "payment_id": null,
+        "created_at": "2026-05-27T04:38:00Z",
+        "amount": 3799,
+        "currency": "gbp",
+        "description": "Annual analytics subscription"
+      },
+      "customer": {
+        "id": "cus_proto_040",
+        "name": "Avery Lee",
+        "email": "prototype.customer40@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "visa",
+          "last4": "3920",
+          "funding": "debit",
+          "country": "AU",
+          "wallet": null,
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-06-08T04:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 1,
+        "submission_method": "manual",
+        "submitted_at": "2026-06-03T04:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Annual analytics subscription",
+          "customer_email_address": "prototype.customer40@example.test",
+          "customer_communication": "Synthetic customer correspondence for prototype testing."
+        },
+        "files": [
+          {
+            "id": "file_proto_040",
+            "type": "receipt",
+            "filename": "receipt-040.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": "lost",
+        "resolved_at": "2026-06-16T04:38:00Z",
+        "loss_reason": "incontestable"
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0040",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_041",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-05-29T03:38:00Z",
+      "status": "lost",
+      "display_status": "Lost",
+      "actionability": "none",
+      "reason": "bank_cannot_process",
+      "amount": 2499,
+      "currency": "gbp",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_041",
+        "charge_id": "ch_proto_041",
+        "payment_id": null,
+        "created_at": "2026-05-23T03:38:00Z",
+        "amount": 2499,
+        "currency": "gbp",
+        "description": "Canvas travel backpack"
+      },
+      "customer": {
+        "id": "cus_proto_041",
+        "name": "Jordan Smith",
+        "email": "prototype.customer41@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "mastercard",
+          "last4": "3993",
+          "funding": "credit",
+          "country": "DE",
+          "wallet": null,
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-06-06T03:38:00Z",
+        "past_due": true,
+        "has_evidence": false,
+        "has_staged_evidence": false,
+        "submission_count": 0,
+        "submission_method": "not_submitted",
+        "submitted_at": null
+      },
+      "evidence": {
+        "fields": {},
+        "files": []
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": "lost",
+        "resolved_at": "2026-06-14T03:38:00Z",
+        "loss_reason": "acquirer_reject"
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0041",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "pdp_proto_042",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-05-26T02:38:00Z",
+      "status": "lost",
+      "display_status": "Lost",
+      "actionability": "none",
+      "reason": "check_returned",
+      "amount": 3999,
+      "currency": "gbp",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_042",
+        "charge_id": null,
+        "payment_id": "py_proto_042",
+        "created_at": "2026-05-19T02:38:00Z",
+        "amount": 3999,
+        "currency": "gbp",
+        "description": "Wireless desk lamp"
+      },
+      "customer": {
+        "id": "cus_proto_042",
+        "name": "Morgan Nguyen",
+        "email": "prototype.customer42@example.test"
+      },
+      "payment_method": {
+        "type": "klarna",
+        "card": null
+      },
+      "evidence_details": {
+        "due_by": "2026-06-04T02:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 1,
+        "submission_method": "smart_disputes",
+        "submitted_at": "2026-05-30T02:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Wireless desk lamp",
+          "customer_email_address": "prototype.customer42@example.test",
+          "customer_communication": "Synthetic customer correspondence for prototype testing."
+        },
+        "files": [
+          {
+            "id": "file_proto_042",
+            "type": "receipt",
+            "filename": "receipt-042.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": "lost",
+        "resolved_at": "2026-06-12T02:38:00Z",
+        "loss_reason": "issuer_decision"
+      },
+      "scenario": {
+        "label": "bnpl_payment_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0042",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_043",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-05-23T01:38:00Z",
+      "status": "lost",
+      "display_status": "Lost",
+      "actionability": "none",
+      "reason": "incorrect_account_details",
+      "amount": 4999,
+      "currency": "gbp",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_043",
+        "charge_id": "ch_proto_043",
+        "payment_id": null,
+        "created_at": "2026-05-15T01:38:00Z",
+        "amount": 4999,
+        "currency": "gbp",
+        "description": "Online design workshop"
+      },
+      "customer": {
+        "id": "cus_proto_043",
+        "name": "Riley Clark",
+        "email": "prototype.customer43@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "discover",
+          "last4": "4139",
+          "funding": "credit",
+          "country": "US",
+          "wallet": "google_pay",
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-06-02T01:38:00Z",
+        "past_due": true,
+        "has_evidence": false,
+        "has_staged_evidence": false,
+        "submission_count": 0,
+        "submission_method": "not_submitted",
+        "submitted_at": null
+      },
+      "evidence": {
+        "fields": {},
+        "files": []
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": "lost",
+        "resolved_at": "2026-06-10T01:38:00Z",
+        "loss_reason": "incontestable"
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0043",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "pdp_proto_044",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-05-20T00:38:00Z",
+      "status": "lost",
+      "display_status": "Lost",
+      "actionability": "none",
+      "reason": "insufficient_funds",
+      "amount": 7500,
+      "currency": "cad",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_044",
+        "charge_id": null,
+        "payment_id": "py_proto_044",
+        "created_at": "2026-05-11T00:38:00Z",
+        "amount": 10000,
+        "currency": "cad",
+        "description": "Ceramic dinnerware set"
+      },
+      "customer": {
+        "id": "cus_proto_044",
+        "name": "Casey Garcia",
+        "email": "prototype.customer44@example.test"
+      },
+      "payment_method": {
+        "type": "afterpay_clearpay",
+        "card": null
+      },
+      "evidence_details": {
+        "due_by": "2026-05-31T00:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 1,
+        "submission_method": "manual",
+        "submitted_at": "2026-05-26T00:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Ceramic dinnerware set",
+          "customer_email_address": "prototype.customer44@example.test",
+          "customer_communication": "Synthetic customer correspondence for prototype testing."
+        },
+        "files": [
+          {
+            "id": "file_proto_044",
+            "type": "receipt",
+            "filename": "receipt-044.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": "lost",
+        "resolved_at": "2026-06-08T00:38:00Z",
+        "loss_reason": "acquirer_reject"
+      },
+      "scenario": {
+        "label": "bnpl_payment_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0044",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_045",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-05-15T23:38:00Z",
+      "status": "warning_needs_response",
+      "display_status": "Warning Needs Response",
+      "actionability": "respond",
+      "reason": "noncompliant",
+      "amount": 9900,
+      "currency": "cad",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_045",
+        "charge_id": "ch_proto_045",
+        "payment_id": null,
+        "created_at": "2026-05-05T23:38:00Z",
+        "amount": 9900,
+        "currency": "cad",
+        "description": "Monthly meal plan"
+      },
+      "customer": {
+        "id": "cus_proto_045",
+        "name": "Taylor Brown",
+        "email": "prototype.customer45@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "mastercard",
+          "last4": "4285",
+          "funding": "credit",
+          "country": "CA",
+          "wallet": null,
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-10-05T04:38:00Z",
+        "past_due": false,
+        "has_evidence": false,
+        "has_staged_evidence": false,
+        "submission_count": 0,
+        "submission_method": "not_submitted",
+        "submitted_at": null
+      },
+      "evidence": {
+        "fields": {},
+        "files": []
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0045",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_046",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-05-12T22:38:00Z",
+      "status": "warning_needs_response",
+      "display_status": "Warning Needs Response",
+      "actionability": "respond",
+      "reason": "fraudulent",
+      "amount": 12500,
+      "currency": "cad",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_046",
+        "charge_id": "ch_proto_046",
+        "payment_id": null,
+        "created_at": "2026-05-01T22:38:00Z",
+        "amount": 12500,
+        "currency": "cad",
+        "description": "Running shoes"
+      },
+      "customer": {
+        "id": "cus_proto_046",
+        "name": "Jamie Martin",
+        "email": "prototype.customer46@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "amex",
+          "last4": "4358",
+          "funding": "credit",
+          "country": "AU",
+          "wallet": "apple_pay",
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-10-06T04:38:00Z",
+        "past_due": false,
+        "has_evidence": false,
+        "has_staged_evidence": false,
+        "submission_count": 0,
+        "submission_method": "not_submitted",
+        "submitted_at": null
+      },
+      "evidence": {
+        "fields": {},
+        "files": []
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0046",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_047",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-05-09T21:38:00Z",
+      "status": "warning_under_review",
+      "display_status": "Warning Under Review",
+      "actionability": "awaiting_decision",
+      "reason": "unrecognized",
+      "amount": 18000,
+      "currency": "aud",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_047",
+        "charge_id": "ch_proto_047",
+        "payment_id": null,
+        "created_at": "2026-04-27T21:38:00Z",
+        "amount": 18000,
+        "currency": "aud",
+        "description": "Cloud storage subscription"
+      },
+      "customer": {
+        "id": "cus_proto_047",
+        "name": "Drew Patel",
+        "email": "prototype.customer47@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "discover",
+          "last4": "4431",
+          "funding": "credit",
+          "country": "DE",
+          "wallet": "google_pay",
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-05-23T21:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 1,
+        "submission_method": "manual",
+        "submitted_at": "2026-05-13T21:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Cloud storage subscription",
+          "customer_email_address": "prototype.customer47@example.test",
+          "customer_purchase_ip": "192.0.2.48",
+          "customer_communication": "Synthetic order confirmation and account activity record."
+        },
+        "files": [
+          {
+            "id": "file_proto_047",
+            "type": "receipt",
+            "filename": "receipt-047.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0047",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_048",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-05-06T20:38:00Z",
+      "status": "warning_under_review",
+      "display_status": "Warning Under Review",
+      "actionability": "awaiting_decision",
+      "reason": "product_not_received",
+      "amount": 24900,
+      "currency": "aud",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_048",
+        "charge_id": "ch_proto_048",
+        "payment_id": null,
+        "created_at": "2026-05-05T20:38:00Z",
+        "amount": 27400,
+        "currency": "aud",
+        "description": "Concert tickets"
+      },
+      "customer": {
+        "id": "cus_proto_048",
+        "name": "Cameron Kim",
+        "email": "prototype.customer48@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "visa",
+          "last4": "4504",
+          "funding": "debit",
+          "country": "US",
+          "wallet": null,
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-05-21T20:38:00Z",
+        "past_due": true,
+        "has_evidence": true,
+        "has_staged_evidence": false,
+        "submission_count": 1,
+        "submission_method": "smart_disputes",
+        "submitted_at": "2026-05-11T20:38:00Z"
+      },
+      "evidence": {
+        "fields": {
+          "product_description": "Concert tickets",
+          "customer_email_address": "prototype.customer48@example.test",
+          "shipping_carrier": "UPS",
+          "shipping_tracking_number": "1ZTEST0000000048"
+        },
+        "files": [
+          {
+            "id": "file_proto_048",
+            "type": "receipt",
+            "filename": "receipt-048.pdf"
+          }
+        ]
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": null,
+        "resolved_at": null,
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0048",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_049",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-05-03T19:38:00Z",
+      "status": "warning_closed",
+      "display_status": "Warning Closed",
+      "actionability": "none",
+      "reason": "product_unacceptable",
+      "amount": 12800,
+      "currency": "jpy",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_049",
+        "charge_id": "ch_proto_049",
+        "payment_id": null,
+        "created_at": "2026-05-01T19:38:00Z",
+        "amount": 12800,
+        "currency": "jpy",
+        "description": "Coffee grinder"
+      },
+      "customer": {
+        "id": "cus_proto_049",
+        "name": "Quinn Wilson",
+        "email": "prototype.customer49@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "mastercard",
+          "last4": "4577",
+          "funding": "credit",
+          "country": "US",
+          "wallet": null,
+          "three_d_secure": "authenticated"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-05-19T19:38:00Z",
+        "past_due": true,
+        "has_evidence": false,
+        "has_staged_evidence": false,
+        "submission_count": 0,
+        "submission_method": "not_submitted",
+        "submitted_at": null
+      },
+      "evidence": {
+        "fields": {},
+        "files": []
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": "warning_closed",
+        "resolved_at": "2026-05-27T19:38:00Z",
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0049",
+        "prototype": "true"
+      }
+    },
+    {
+      "id": "du_proto_050",
+      "object": "dispute",
+      "livemode": false,
+      "created_at": "2026-09-27T18:38:00Z",
+      "status": "warning_closed",
+      "display_status": "Warning Closed",
+      "actionability": "none",
+      "reason": "duplicate",
+      "amount": 1299,
+      "currency": "mxn",
+      "is_charge_refundable": false,
+      "payment": {
+        "payment_intent_id": "pi_proto_050",
+        "charge_id": "ch_proto_050",
+        "payment_id": null,
+        "created_at": "2026-09-24T18:38:00Z",
+        "amount": 1299,
+        "currency": "mxn",
+        "description": "Annual analytics subscription"
+      },
+      "customer": {
+        "id": "cus_proto_050",
+        "name": "Avery Lee",
+        "email": "prototype.customer50@example.test"
+      },
+      "payment_method": {
+        "type": "card",
+        "card": {
+          "network": "amex",
+          "last4": "4650",
+          "funding": "credit",
+          "country": "GB",
+          "wallet": "apple_pay",
+          "three_d_secure": "not_supported_or_not_used"
+        }
+      },
+      "evidence_details": {
+        "due_by": "2026-09-08T04:38:00Z",
+        "past_due": true,
+        "has_evidence": false,
+        "has_staged_evidence": false,
+        "submission_count": 0,
+        "submission_method": "not_submitted",
+        "submitted_at": null
+      },
+      "evidence": {
+        "fields": {},
+        "files": []
+      },
+      "smart_disputes": {
+        "status": "unavailable",
+        "recommended_evidence": []
+      },
+      "outcome": {
+        "result": "warning_closed",
+        "resolved_at": "2026-09-29T04:38:00Z",
+        "loss_reason": null
+      },
+      "scenario": {
+        "label": "standard_card_dispute",
+        "notes": "Entirely synthetic prototype data; not sourced from a Stripe user or production record."
+      },
+      "metadata": {
+        "order_id": "order_proto_0050",
+        "prototype": "true"
+      }
+    }
+  ]
+}

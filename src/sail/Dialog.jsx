@@ -8,6 +8,7 @@ const Dialog = ({
   subtitle,
   footer,
   size = 'medium',
+  width,
   children,
   className = '',
   overlayClassName = '',
@@ -99,6 +100,7 @@ const Dialog = ({
       {/* Dialog */}
       <div
         className={`relative bg-surface rounded-lg shadow-xl flex flex-col max-h-[calc(100vh-64px)] ${size !== 'full' ? 'w-full' : ''} ${isClosing ? 'animate-[scaleOut_150ms_ease-in_forwards]' : 'animate-[scaleIn_150ms_ease-out]'} ${sizes[size]} ${className}`}
+        style={width ? { maxWidth: width } : undefined}
         role="dialog"
         aria-modal="true"
       >
