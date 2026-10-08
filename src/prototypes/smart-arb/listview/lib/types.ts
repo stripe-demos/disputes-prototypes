@@ -4,6 +4,8 @@ export interface StatusStyle {
   background: string;
   color: string;
   outline: string;
+  /** Optional hover tooltip copy shown on the status badge. */
+  tooltip?: string;
 }
 
 /**
@@ -201,6 +203,8 @@ export interface TabConfig {
     sortCol?: string | null;
     sortDir?: 'asc' | 'desc';
     columns?: string[];
+    /** Default filters applied to the "All" chip (e.g. restricting the page to a stage) without surfacing a named chip. */
+    filters?: { id: string; filterType?: string; selectedValues?: string[]; filterName?: string }[];
   };
   /**
    * Named view chips shown after "All". Never include an 'all' entry here —

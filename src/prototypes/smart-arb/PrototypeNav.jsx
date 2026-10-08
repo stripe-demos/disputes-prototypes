@@ -6,13 +6,54 @@ import SelectDropdown from '../../sail/SelectDropdown';
 
 export const PROTOTYPE_NAV_HEIGHT = 60;
 
+export const DISCOVERY_TOGGLE_GROUPS = [
+  {
+    key: 'variant',
+    default: 'general',
+    options: [
+      { value: 'general', label: 'General announcement' },
+      { value: 'personalized', label: 'Personalized' },
+      { value: 'in-context', label: 'Dashboard notice' },
+    ],
+  },
+  {
+    key: 'defaultState',
+    default: 'default-off',
+    hidden: (activeValues) => activeValues.variant !== 'general' && activeValues.variant !== 'in-context',
+    options: [
+      { value: 'default-on-pre', label: 'Default on (pre-activation)' },
+      { value: 'default-on-post', label: 'Default on (post-activation)' },
+      { value: 'default-off', label: 'Default off' },
+    ],
+  },
+  {
+    key: 'angle',
+    default: 'off',
+    hidden: (activeValues) => activeValues.variant !== 'personalized',
+    options: [
+      { value: 'off', label: 'Off (Potential upsell)' },
+      { value: 'on', label: 'On (Revenue recovery)' },
+    ],
+  },
+];
+
 export const ENABLEMENT_TOGGLE_GROUPS = [
   {
     key: 'manual',
     default: 'manual',
     options: [
-      { value: 'no-manual', label: 'No manual' },
-      { value: 'manual', label: 'Manual' },
+      { value: 'no-manual', label: 'Smart Arb only' },
+      { value: 'manual', label: 'Manual + Smart Arb' },
+    ],
+  },
+  {
+    key: 'defaultState',
+    default: 'default-off',
+    hidden: (activeValues) => activeValues.manual !== 'no-manual',
+    options: [
+      { value: 'inherits', label: 'Inherits SD configuration' },
+      { value: 'default-on', label: 'Default on' },
+      { value: 'default-off', label: 'Default off' },
     ],
   },
   {
@@ -23,15 +64,7 @@ export const ENABLEMENT_TOGGLE_GROUPS = [
       { value: 'merchant', label: 'Merchant first' },
       { value: 'automated', label: 'Stripe first' },
       { value: 'choice', label: 'User choice' },
-      { value: 'all-or-nothing', label: 'All or nothing' },
-    ],
-  },
-  {
-    key: 'detail',
-    default: 'simple',
-    options: [
-      { value: 'simple', label: 'Simple' },
-      { value: 'impact', label: 'Impact shown' },
+      { value: 'all-or-nothing', label: 'Stripe or manual' },
     ],
   },
 ];
@@ -53,11 +86,7 @@ const STAGES = [
     key: 'discovery',
     label: 'Discovery',
     match: (p, base) => p === `${base}/discovery`,
-    variants: [
-      { label: 'General announcement', path: 'discovery?variant=general' },
-      { label: 'Personalized', path: 'discovery?variant=personalized' },
-      { label: 'In context', path: 'discovery?variant=in-context' },
-    ],
+    defaultPath: 'discovery',
   },
   {
     key: 'enablement',
@@ -67,14 +96,12 @@ const STAGES = [
       p.startsWith(`${base}/disputes/evidence-library`) ||
       p.startsWith(`${base}/radar`),
     defaultPath: 'settings/payments?tab=disputes',
-    variants: [],
   },
   {
     key: 'management',
     label: 'Management',
     match: (p, base) => p.startsWith(`${base}/disputes`) && !p.startsWith(`${base}/disputes/evidence-library`),
     defaultPath: 'disputes/activity',
-    variants: [],
   },
 ];
 
@@ -132,6 +159,41 @@ function StageSelect({ activeStage, onSelect }) {
   );
 }
 
+function ToggleGroups({ groups, activeValues, onChange }) {
+  const visibleGroups = groups.filter((group) => !group.hidden?.(activeValues));
+
+  return (
+    <>
+      {visibleGroups.map((group, groupIndex) => {
+        const activeValue = activeValues[group.key];
+        return (
+          <div key={group.key} className="flex items-center gap-4 shrink-0">
+            {groupIndex > 0 && <div className="h-5 w-px bg-border shrink-0" />}
+            <div className="flex items-center gap-2 flex-wrap">
+              {group.options.map((option) => {
+                const active = option.value === activeValue;
+                return (
+                  <button
+                    key={option.value}
+                    type="button"
+                    onClick={() => onChange(group.key, option.value)}
+                    className={`h-6 flex items-center text-label-small-emphasized rounded-full px-2.5 transition-colors duration-150 ${active
+                      ? 'bg-brand/10 text-brand'
+                      : 'border border-border text-subdued hover:bg-offset'
+                      }`}
+                  >
+                    {option.label}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        );
+      })}
+    </>
+  );
+}
+
 export default function PrototypeNav() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -139,19 +201,11 @@ export default function PrototypeNav() {
 
   const activeStage = STAGES.find((stage) => stage.match(location.pathname, basePath)) || STAGES[0];
 
-  const isActiveVariant = (variant) => {
-    const [variantPath, variantQuery] = variant.path.split('?');
-    if (location.pathname !== `${basePath}/${variantPath}`) return false;
-
-    const variantParam = new URLSearchParams(variantQuery).get('variant');
-    if (!variantParam) return true;
-
-    const activeParam = new URLSearchParams(location.search).get('variant') || 'general';
-    return activeParam === variantParam;
-  };
-
+  const showDiscoveryToggles = location.pathname === `${basePath}/discovery`;
   const showEnablementToggles = location.pathname === `${basePath}/settings/payments`;
-  const showManagementToggles = location.pathname === `${basePath}/disputes/activity`;
+  const showManagementToggles =
+    location.pathname.startsWith(`${basePath}/disputes`) &&
+    !location.pathname.startsWith(`${basePath}/disputes/evidence-library`);
   const currentSearchParams = new URLSearchParams(location.search);
 
   const handleToggleChange = (groupKey, value) => {
@@ -159,6 +213,9 @@ export default function PrototypeNav() {
     next.set(groupKey, value);
     navigate(`${location.pathname}?${next.toString()}`);
   };
+
+  const toggleGroupsFor = (groups) =>
+    Object.fromEntries(groups.map((group) => [group.key, currentSearchParams.get(group.key) || group.default]));
 
   return (
     <div
@@ -171,112 +228,42 @@ export default function PrototypeNav() {
             activeStage={activeStage}
             onSelect={(key) => {
               const stage = STAGES.find((s) => s.key === key);
-              if (stage) navigate(`${basePath}/${stage.defaultPath || stage.variants[0].path}`);
+              if (stage) navigate(`${basePath}/${stage.defaultPath}`);
             }}
           />
 
-          {activeStage.variants.length > 0 && (
+          {showDiscoveryToggles && (
             <>
               <div className="h-5 w-px bg-border shrink-0" />
-
-              <div className="flex items-center gap-2 flex-wrap">
-                {activeStage.variants.map((variant) => {
-                  const active = isActiveVariant(variant);
-                  return (
-                    <button
-                      key={variant.label}
-                      type="button"
-                      onClick={() => navigate(`${basePath}/${variant.path}`)}
-                      className={`h-6 flex items-center text-label-small-emphasized rounded-full pl-[6px] pr-[8px] transition-colors duration-150 ${active
-                        ? 'bg-brand/10 text-brand'
-                        : 'border border-border text-subdued hover:bg-offset'
-                        }`}
-                    >
-                      {variant.label}
-                    </button>
-                  );
-                })}
-              </div>
+              <ToggleGroups
+                groups={DISCOVERY_TOGGLE_GROUPS}
+                activeValues={toggleGroupsFor(DISCOVERY_TOGGLE_GROUPS)}
+                onChange={handleToggleChange}
+              />
             </>
           )}
 
-          {showEnablementToggles && (() => {
-            const activeValues = Object.fromEntries(
-              ENABLEMENT_TOGGLE_GROUPS.map((group) => [group.key, currentSearchParams.get(group.key) || group.default])
-            );
-            const visibleGroups = ENABLEMENT_TOGGLE_GROUPS.filter((group) => !group.hidden?.(activeValues));
+          {showEnablementToggles && (
+            <>
+              <div className="h-5 w-px bg-border shrink-0" />
+              <ToggleGroups
+                groups={ENABLEMENT_TOGGLE_GROUPS}
+                activeValues={toggleGroupsFor(ENABLEMENT_TOGGLE_GROUPS)}
+                onChange={handleToggleChange}
+              />
+            </>
+          )}
 
-            return (
-              <>
-                <div className="h-5 w-px bg-border shrink-0" />
-                {visibleGroups.map((group, groupIndex) => {
-                  const activeValue = activeValues[group.key];
-                  return (
-                    <div key={group.key} className="flex items-center gap-4 shrink-0">
-                      {groupIndex > 0 && <div className="h-5 w-px bg-border shrink-0" />}
-                      <div className="flex items-center gap-2 flex-wrap">
-                        {group.options.map((option) => {
-                          const active = option.value === activeValue;
-                          return (
-                            <button
-                              key={option.value}
-                              type="button"
-                              onClick={() => handleToggleChange(group.key, option.value)}
-                              className={`h-6 flex items-center text-label-small-emphasized rounded-full px-2.5 transition-colors duration-150 ${active
-                                ? 'bg-brand/10 text-brand'
-                                : 'border border-border text-subdued hover:bg-offset'
-                                }`}
-                            >
-                              {option.label}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  );
-                })}
-              </>
-            );
-          })()}
-
-          {showManagementToggles && (() => {
-            const activeValues = Object.fromEntries(
-              MANAGEMENT_TOGGLE_GROUPS.map((group) => [group.key, currentSearchParams.get(group.key) || group.default])
-            );
-            const visibleGroups = MANAGEMENT_TOGGLE_GROUPS.filter((group) => !group.hidden?.(activeValues));
-
-            return (
-              <>
-                <div className="h-5 w-px bg-border shrink-0" />
-                {visibleGroups.map((group, groupIndex) => {
-                  const activeValue = activeValues[group.key];
-                  return (
-                    <div key={group.key} className="flex items-center gap-4 shrink-0">
-                      {groupIndex > 0 && <div className="h-5 w-px bg-border shrink-0" />}
-                      <div className="flex items-center gap-2 flex-wrap">
-                        {group.options.map((option) => {
-                          const active = option.value === activeValue;
-                          return (
-                            <button
-                              key={option.value}
-                              type="button"
-                              onClick={() => handleToggleChange(group.key, option.value)}
-                              className={`h-6 flex items-center text-label-small-emphasized rounded-full px-2.5 transition-colors duration-150 ${active
-                                ? 'bg-brand/10 text-brand'
-                                : 'border border-border text-subdued hover:bg-offset'
-                                }`}
-                            >
-                              {option.label}
-                            </button>
-                          );
-                        })}
-                      </div>
-                    </div>
-                  );
-                })}
-              </>
-            );
-          })()}
+          {showManagementToggles && (
+            <>
+              <div className="h-5 w-px bg-border shrink-0" />
+              <ToggleGroups
+                groups={MANAGEMENT_TOGGLE_GROUPS}
+                activeValues={toggleGroupsFor(MANAGEMENT_TOGGLE_GROUPS)}
+                onChange={handleToggleChange}
+              />
+            </>
+          )}
         </div>
       </div>
     </div>

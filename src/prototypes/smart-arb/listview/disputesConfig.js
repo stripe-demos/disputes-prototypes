@@ -16,6 +16,7 @@ import {
   getSmartDisputesLabel,
   getDueIn,
   fnv1aPercent,
+  pluralizeDays,
 } from '../data/disputes';
 
 // Cloned 1:1 from apps/m2/src/app/disputes/config.ts (columns, filters, view
@@ -29,9 +30,10 @@ const COLUMNS = [
   { id: 'amount', type: 'basic-text', label: 'Amount' },
   {
     id: 'status', type: 'status', label: 'Status',
-    dataKeys: { styleKey: 'status-style' },
+    dataKeys: { styleKey: 'status-style', tooltipKey: 'status-tooltip' },
     statusMap: {
       'Needs response': S.warning,
+      'Needs response (Appeal)': S.warning,
       'Needs response (Smart Disputes available)': S.default,
       'Under review': S.default,
       'Won': S.success,
@@ -47,7 +49,7 @@ const COLUMNS = [
   { id: 'respond-by', type: 'date', label: 'Respond by', colSpan: 2 },
   { id: 'due-in', type: 'basic-text', label: 'Due in' },
   { id: 'win-likelihood', type: 'dot-scale', label: 'Win likelihood' },
-  { id: 'smart-disputes', type: 'basic-text', label: 'Smart Disputes' },
+  { id: 'smart-disputes', type: 'basic-text', label: 'Smart Disputes', defaultVisible: false },
   { id: 'settlement-merchant', type: 'basic-text', label: 'Settlement merchant', defaultVisible: false },
   { id: 'charge-transferred-to', type: 'basic-text', label: 'Charge transferred to', defaultVisible: false },
 ];
@@ -136,14 +138,29 @@ function toRow(d, automationLevel) {
   const winLikelihood = getWinLikelihood(effective);
   const statusLabel = getStatusLabel(effective);
   const isNeedsResponse = getStatusFilterCategory(effective.status) === 'needs_response';
+  const isUnderReview = getStatusFilterCategory(effective.status) === 'under_review';
+  const wasAutomated = effective.status !== d.status;
+  const stage = getDisputeStage(d);
+  const isAppealStage = stage === DISPUTE_STAGE_LABELS.appeal;
   return {
     id: d.id,
     amount: `${formatCurrency(d.amount, d.currency)} ${d.currency.toUpperCase()}`,
     status: statusLabel,
-    'status-style': isNeedsResponse && d.smartDisputesAvailable ? 'Needs response (Smart Disputes available)' : statusLabel,
+    'status-style':
+      isNeedsResponse && d.smartDisputesAvailable ? 'Needs response (Smart Disputes available)' :
+      isNeedsResponse && isAppealStage ? 'Needs response (Appeal)' :
+      statusLabel,
+    'status-tooltip':
+      isNeedsResponse && isAppealStage
+        ? `You have ${pluralizeDays(d.daysRemaining)} to appeal the initial dispute decision.`
+        : isUnderReview
+        ? (wasAutomated
+          ? 'Smart Disputes automatically sent an appeal. The network will respond in 30-60 days.'
+          : 'You sent an appeal. The network will respond in 30-60 days.')
+        : undefined,
     resolution: getResolution(effective),
     reason: DISPUTE_REASON_LABELS[d.reason] || d.reason,
-    stage: getDisputeStage(d),
+    stage,
     customer: d.customerName || d.customerEmail,
     'source-type': `•••• ${d.cardLast4}`,
     'source-type-secondary': false,
@@ -152,7 +169,7 @@ function toRow(d, automationLevel) {
     'respond-by': d.dueBy ? formatDate(d.dueBy) : '—',
     'due-in': getDueIn(effective),
     'win-likelihood': winLikelihood !== null ? `${winLikelihood}%` : '—',
-    'smart-disputes': getDisputeStage(d) === DISPUTE_STAGE_LABELS.appeal ? '—' : getSmartDisputesLabel(d),
+    'smart-disputes': isAppealStage ? '—' : getSmartDisputesLabel(d),
     'settlement-merchant': '—',
     'charge-transferred-to': '—',
   };
@@ -215,6 +232,9 @@ export function createDisputesConfig(automationLevel = 'manual') {
     data: disputes.map((d) => toRow(d, automationLevel)),
     defaultViewChips: VIEW_CHIPS,
     defaultPinnedIds: ['smart-disputes-available', 'needs-response', 'under-review', 'closed'],
+    allViewConfig: {
+      filters: [{ id: 'stage', filterType: 'single-select', selectedValues: [DISPUTE_STAGE_LABELS.appeal] }],
+    },
   };
 
   return {

@@ -15,6 +15,8 @@ export { default as SelectDropdown } from './SelectDropdown';
 export { default as Switch } from './Switch';
 export { default as Table } from './Table';
 export { default as Tabs } from './Tabs';
+export { default as Timeline } from './Timeline';
+export { default as TimelineItem } from './TimelineItem';
 export { default as Toggle, ToggleGroup } from './Toggle';
 export { default as Tooltip } from './Tooltip';
 export { default as Workbench, WORKBENCH_BAR_HEIGHT, WORKBENCH_PANEL_HEIGHT } from './Workbench';

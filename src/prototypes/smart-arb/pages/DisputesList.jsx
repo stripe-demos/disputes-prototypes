@@ -6,9 +6,25 @@ import ListViewTemplate from '../listview/ListViewTemplate';
 import { createDisputesConfig } from '../listview/disputesConfig';
 import { Icon } from '../../../icons/SailIcons';
 
-export function AppealsNoticeBanner({ onDismiss }) {
+const NOTICE_BANNER_CONTENT = {
+  'default-off': {
+    message: 'Turn on automatic appeals, and Smart Disputes can appeal lost disputes when available to help you recover revenue.',
+    ctaLabel: 'Turn on',
+  },
+  'default-on-pre': {
+    message: 'Automatic appeals will be turned on {date}. Starting soon, Smart Disputes can appeal selected lost disputes for your business.',
+    ctaLabel: 'Edit preferences',
+  },
+  'default-on-post': {
+    message: 'Automatic appeals are now on. Smart Disputes can appeal selected lost disputes for your business.',
+    ctaLabel: 'Manage',
+  },
+};
+
+export function AppealsNoticeBanner({ onDismiss, state = 'default-off', linkToSettings = true }) {
   const navigate = useNavigate();
   const basePath = useBasePath();
+  const { message, ctaLabel } = NOTICE_BANNER_CONTENT[state] || NOTICE_BANNER_CONTENT['default-off'];
 
   return (
     <div className="flex items-center justify-between gap-4 rounded-[8px] bg-offset px-3 py-2 mb-4">
@@ -18,17 +34,21 @@ export function AppealsNoticeBanner({ onDismiss }) {
           <span className="text-label-small-emphasized text-default">New</span>
         </div>
         <p className="text-body-small text-default truncate flex-1">
-          Turn on automatic appeals, and Smart Disputes can appeal lost disputes when available to help you recover revenue.
+          {message}
         </p>
       </div>
       <div className="flex items-center gap-3 shrink-0">
-        <button
-          type="button"
-          onClick={() => navigate(`${basePath}/settings/payments?tab=disputes`)}
-          className="text-label-medium-emphasized text-brand hover:underline"
-        >
-          Turn on
-        </button>
+        {linkToSettings ? (
+          <button
+            type="button"
+            onClick={() => navigate(`${basePath}/settings/payments?tab=disputes`)}
+            className="text-label-medium-emphasized text-brand hover:underline"
+          >
+            {ctaLabel}
+          </button>
+        ) : (
+          <span className="text-label-medium-emphasized text-brand">{ctaLabel}</span>
+        )}
         <div className="h-4 w-px bg-border" />
         <button type="button" onClick={onDismiss} className="text-icon-subdued hover:text-icon-default">
           <Icon name="cancel" size="xsmall" />
@@ -49,10 +69,11 @@ export default function DisputesList() {
   const tab = config.tabs.some((t) => t.tabId === lastSegment) ? lastSegment : 'activity';
   const [noticeDismissed, setNoticeDismissed] = useState(false);
   const showNotice = new URLSearchParams(location.search).get('notice') === 'smart-arb' && !noticeDismissed;
+  const noticeState = new URLSearchParams(location.search).get('defaultState') || 'default-off';
 
   return (
     <PrototypeProvider>
-      {showNotice && <AppealsNoticeBanner onDismiss={() => setNoticeDismissed(true)} />}
+      {showNotice && <AppealsNoticeBanner state={noticeState} onDismiss={() => setNoticeDismissed(true)} />}
       <ListViewTemplate
         config={config}
         basePath={`${basePath}/disputes`}

@@ -15,6 +15,7 @@ import { sheetHeightBelow } from './mobile/BottomSheet';
 import { FILTER_DATE_OPS, FILTER_DATE_UNITS, FILTER_TIMEZONES, FILTER_VALUE_OPS, orderFilterDefs } from './lib/filterOptions';
 import { groupMenuItems, menuRowTone } from './lib/menuGroups';
 import { CardIcon } from '../../../icons/SailCardIcons';
+import Tooltip from '../../../sail/Tooltip';
 
 // Default transition for all animations
 const DEFAULT_TRANSITION = 'all 250ms cubic-bezier(0.2, 0, 0.1, 1)';
@@ -976,10 +977,13 @@ const TableRow = memo(function TableRow({
             const statusVal   = String(row[colId] ?? '');
             const styleKey    = colDef?.dataKeys?.['styleKey'];
             const styleVal    = styleKey ? String(row[styleKey] ?? statusVal) : statusVal;
-            const badgeStyle  = colDef?.statusMap?.[styleVal] ?? DEFAULT_STATUS_STYLE;
+            const tooltipKey  = colDef?.dataKeys?.['tooltipKey'];
+            const { tooltip: staticTooltip, ...badgeStyle } = colDef?.statusMap?.[styleVal] ?? DEFAULT_STATUS_STYLE;
+            const badgeTooltip = (tooltipKey ? row[tooltipKey] as string | undefined : undefined) ?? staticTooltip;
+            const badge = <span className="text-[12px] font-normal inline-flex items-center" style={{ height: '20px', borderRadius: '4px', padding: '2px 6px', whiteSpace: 'nowrap', ...badgeStyle, ...contentFade }}>{renderSearchableText(statusVal)}</span>;
             return [
               <td key={colId} data-col-id={colId} className="px-[16px]" style={{ ...cellBg, ...stickyBase, borderRight: frozenBorderRight }}>
-              {isCellEmpty ? nullSpan : <span className="text-[12px] font-normal inline-flex items-center" style={{ height: '20px', borderRadius: '4px', padding: '2px 6px', whiteSpace: 'nowrap', ...badgeStyle, ...contentFade }}>{renderSearchableText(statusVal)}</span>}
+              {isCellEmpty ? nullSpan : badgeTooltip ? <Tooltip content={badgeTooltip} variant="minimal">{badge}</Tooltip> : badge}
               </td>,
             ];
           }
@@ -1619,11 +1623,14 @@ export default function ListViewTemplate({
   initialTabId,
   /** When provided, clicking a row (outside the checkbox/more-menu) calls this with the row data. */
   onRowOpen,
+  /** Optional content rendered directly below the tab bar, above the toolbar/table. */
+  belowTabsSlot,
 }: {
   config: PageConfig;
   basePath?: string;
   initialTabId?: string;
   onRowOpen?: (row: Record<string, unknown>) => void;
+  belowTabsSlot?: React.ReactNode;
 }) {
   const [activeTabIdx, setActiveTabIdx] = useState(() => {
     if (!initialTabId) return 0;
@@ -2004,7 +2011,11 @@ export default function ListViewTemplate({
     const freshConfigs: Record<string, { filters: FilterChip[]; searchQuery: string; sortCol?: string | null; sortDir?: 'asc' | 'desc' }> = {
       // 'all' chip always reset to allViewConfig values.
       all: {
-        filters: [],
+        filters: (tab.allViewConfig?.filters ?? []).map(f => ({
+          ...f,
+          filterName: f.filterName ?? tabFilters.find(fd => fd.id === f.id)?.label ?? f.id,
+          selectedValues: f.selectedValues ?? [],
+        })) as FilterChip[],
         searchQuery: '',
         sortCol: tab.allViewConfig?.sortCol ?? null,
         sortDir: (tab.allViewConfig?.sortDir ?? 'asc') as 'asc' | 'desc',
@@ -2189,7 +2200,7 @@ export default function ListViewTemplate({
     Object.fromEntries([
       // 'all' chip always gets its own entry; seeded from allViewConfig when provided.
       ['all', {
-        filters: [],
+        filters: (activeTab.allViewConfig?.filters ?? []).map(f => ({ ...f, filterName: resolveFilterName(f), selectedValues: f.selectedValues ?? [] })),
         searchQuery: '',
         sortCol: activeTab.allViewConfig?.sortCol ?? null,
         sortDir: (activeTab.allViewConfig?.sortDir ?? 'asc') as 'asc' | 'desc',
@@ -5210,6 +5221,12 @@ export default function ListViewTemplate({
                 );
               })}
             </div>
+          </div>
+        )}
+
+        {belowTabsSlot && (
+          <div className="px-[2px] max-md:px-[4px]">
+            {belowTabsSlot}
           </div>
         )}
 

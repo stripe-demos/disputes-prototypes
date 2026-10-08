@@ -7,6 +7,17 @@ import { useBasePath } from '../../../contexts/BasePath';
 const DEFAULT_AUTO_RESPOND_PREFS = { smartDisputesOn: true, manualOn: true, priority: 'manual' };
 const DEFAULT_APPEAL_PREFS = { smartDisputesOn: false, manualOn: false, reviewOrder: 'user-first' };
 
+function getDefaultAppealPrefs({ manual, defaultState, autoRespondPrefs }) {
+  if (manual !== 'no-manual') return DEFAULT_APPEAL_PREFS;
+
+  const smartDisputesOn =
+    defaultState === 'default-on' ? true :
+    defaultState === 'inherits' ? autoRespondPrefs.smartDisputesOn :
+    false;
+
+  return { ...DEFAULT_APPEAL_PREFS, smartDisputesOn };
+}
+
 function Toast({ message, onDismiss }) {
   useEffect(() => {
     if (!message) return;
@@ -270,7 +281,11 @@ function AppealToggleItem({ title, description, selected, recommended, onClick, 
   return (
     <div className="w-full relative isolate">
       {recommended && (
-        <span className="relative z-[2] -mb-px inline-flex w-fit items-center rounded-t-md bg-brand-500 px-1.5 py-1 text-label-small-emphasized text-white">
+        <span
+          className={`relative z-[2] -mb-px inline-flex w-fit items-center rounded-t-md px-1.5 py-1 text-label-small-emphasized ${
+            selected ? 'bg-brand-500 text-white' : 'bg-border text-subdued'
+          }`}
+        >
           Recommended
         </span>
       )}
@@ -365,14 +380,12 @@ function AppealPreferencesModal({ open, onClose, value, onSave, showImpact = tru
         open={open}
         onClose={onClose}
         size="medium"
-        title="Enable automatic appeals"
+        title={<span className="text-heading-medium text-default">Enable automatic appeals</span>}
         subtitle={
           <>
-            Stripe reviews disputes you lost manually and intelligently decides whether to appeal
-            or accept the decision. Smart Disputes automatically appeals those eligible disputes.
-            <br />
-            <br />
-            Fee only charged if you win the appeal.
+            Stripe reviews disputes you lost manually and intelligently chooses which lost
+            disputes to appeal and sends the appeals. A Smart Disputes fee applies only if you win.{' '}
+            <Link href="#" variant="secondary">View docs</Link>
           </>
         }
         footer={
@@ -387,7 +400,24 @@ function AppealPreferencesModal({ open, onClose, value, onSave, showImpact = tru
             </Button>
           </>
         }
-      />
+      >
+        <div>
+          <p className="text-heading-small text-default">Estimated impact based on last 6 months</p>
+          <div className="flex items-center gap-3 mt-2">
+            <div className="shrink-0 bg-offset rounded-md px-4 py-2">
+              <p className="text-body-small text-subdued">Lost revenue</p>
+              <p className="text-heading-small text-default mt-0.5">$16K</p>
+            </div>
+            <Icon name="arrowRight" size="small" className="text-icon-subdued shrink-0" />
+            <div className="shrink-0 bg-offset rounded-md px-4 py-2">
+              <p className="text-body-small text-subdued">Estimated recovery with appeals</p>
+              <p className="text-heading-small text-default mt-0.5">
+                $12.3K <span className="text-label-small text-success">+72%</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </Dialog>
     );
   }
 
@@ -565,7 +595,9 @@ function getEnablementAppealCopy({ escalation, manual, detail, appealPrefs }) {
   } else if (escalation === 'automated') {
     base = 'Smart Disputes automatically appeals eligible disputes first. You can still manually appeal any disputes it skips.';
   } else if (escalation === 'choice') {
-    base = 'You review some of the disputes you lost and so does Stripe.';
+    base = appealPrefs.reviewOrder === 'stripe-first'
+      ? 'Stripe reviews disputes you lost first and automatically appeals eligible ones. You review and decide on the rest.'
+      : 'You review disputes you lost first and decide how to respond. Stripe then reviews the rest and automatically appeals eligible ones.';
   } else {
     base = 'You review and appeal disputes manually first. Smart Disputes automatically appeals any eligible disputes you haven’t responded to by the deadline.';
   }
@@ -580,19 +612,22 @@ function DisputesSettingsPanel() {
   const escalation = searchParams.get('escalation') || 'merchant';
   const manual = searchParams.get('manual') || 'manual';
   const detail = searchParams.get('detail') || 'simple';
+  const defaultState = searchParams.get('defaultState') || 'default-off';
   const [activeModal, setActiveModal] = useState(null);
   const [autoRespondOpen, setAutoRespondOpen] = useState(false);
   const [autoRespondPrefs, setAutoRespondPrefs] = useState(DEFAULT_AUTO_RESPOND_PREFS);
   const [appealResponsesOpen, setAppealResponsesOpen] = useState(false);
-  const [appealPrefs, setAppealPrefs] = useState(DEFAULT_APPEAL_PREFS);
+  const [appealPrefs, setAppealPrefs] = useState(() =>
+    getDefaultAppealPrefs({ manual, defaultState, autoRespondPrefs: DEFAULT_AUTO_RESPOND_PREFS })
+  );
   const [businessDetailsOpen, setBusinessDetailsOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState(null);
   const [disputeDeflectionOn, setDisputeDeflectionOn] = useState(true);
   const [disputeResolutionOn, setDisputeResolutionOn] = useState(true);
 
   useEffect(() => {
-    setAppealPrefs(DEFAULT_APPEAL_PREFS);
-  }, [escalation]);
+    setAppealPrefs(getDefaultAppealPrefs({ manual, defaultState, autoRespondPrefs }));
+  }, [escalation, manual, defaultState, autoRespondPrefs.smartDisputesOn]);
 
   const closeModal = () => setActiveModal(null);
 
