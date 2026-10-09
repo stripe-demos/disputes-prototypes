@@ -61,7 +61,7 @@ export const ENABLEMENT_TOGGLE_GROUPS = [
     default: 'merchant',
     hidden: (activeValues) => activeValues.manual === 'no-manual',
     options: [
-      { value: 'merchant', label: 'Merchant first' },
+      { value: 'merchant', label: 'User first' },
       { value: 'automated', label: 'Stripe first' },
       { value: 'choice', label: 'User choice' },
       { value: 'all-or-nothing', label: 'Stripe or manual' },

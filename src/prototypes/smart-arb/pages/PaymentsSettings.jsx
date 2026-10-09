@@ -314,21 +314,20 @@ function AppealToggleItem({ title, description, selected, recommended, onClick, 
 function getAppealBothTitle({ escalation, showImpact }) {
   if (!showImpact) {
     if (escalation === 'automated') return 'Stripe handles some appeals, you handle the rest';
-    if (escalation === 'choice') return 'Let Stripe handle some appeals';
     return 'You handle appeals, with Stripe as backup';
   }
   return 'Let Stripe handle some appeals';
 }
 
 function getAppealBothDescription({ escalation, manual, showImpact }) {
-  if (escalation === 'choice') {
-    return 'You review some of the disputes you lost and so does Stripe.';
-  }
   if (!showImpact) {
     if (escalation === 'automated') {
-      return 'Smart Disputes chooses which lost disputes to appeal. You review the rest and decide the response. The Smart Dispute fee applies only if you win. You pay appeal fees for the ones you send, win or lose.';
+      return 'Smart Disputes chooses which lost disputes to appeal. You review the rest and decide the response.';
     }
-    return 'You choose which lost disputes to appeal. Smart Disputes reviews the rest and appeals the ones it selects. You pay appeal fees for the ones you send, win or lose. The Smart Dispute fee applies only if you win.';
+    return 'You choose which lost disputes to appeal. Smart Disputes reviews the rest and appeals the ones it selects.';
+  }
+  if (escalation === 'choice') {
+    return 'You review some of the disputes you lost and so does Stripe.';
   }
   if (escalation === 'automated' && manual === 'manual') {
     return 'Stripe intelligently assesses disputes you lost and automatically appeals eligible disputes. You then review the rest and decide if you want to appeal or agree with the decision.';
@@ -336,14 +335,18 @@ function getAppealBothDescription({ escalation, manual, showImpact }) {
   return 'You review disputes you lost and decide if you want to appeal or accept the decision. Stripe then intelligently assesses the remainder and appeals eligible disputes.';
 }
 
-function getStripeHandlesAppealsTitle(showImpact) {
+function getStripeHandlesAppealsTitle(showImpact, escalation) {
+  if (!showImpact && escalation === 'choice') return 'Stripe handles appeals, with you as backup';
   return showImpact ? 'Let Stripe handle appeals' : 'Stripe handles appeals for you';
 }
 
-function getStripeHandlesAppealsDescription(showImpact) {
+function getStripeHandlesAppealsDescription(showImpact, escalation) {
+  if (!showImpact && escalation === 'choice') {
+    return 'Smart Disputes chooses which lost disputes to appeal and sends the appeals automatically. You review the rest and decide what you want to appeal.';
+  }
   return showImpact
     ? 'Stripe intelligently assesses disputes you lost and chooses which to appeal with the network. Fully automated and fee is only charged if you win the appeal.'
-    : "Smart Disputes chooses which lost disputes to appeal and sends the appeals. The rest aren't appealed. A Smart Disputes fee applies only if you win.";
+    : "Smart Disputes chooses which lost disputes to appeal and sends the appeals. The rest aren't appealed.";
 }
 
 function getHandleAllAppealsTitle(showImpact) {
@@ -353,13 +356,8 @@ function getHandleAllAppealsTitle(showImpact) {
 function getHandleAllAppealsDescription(showImpact) {
   return showImpact
     ? 'You review disputes you lost that can be appealed and decide how to respond. Fees charged when an appeal is sent regardless of outcome.'
-    : 'You choose which lost disputes to appeal. You pay the appeal fees for each one you send, win or lose. Fees vary and can be more than the dispute amount.';
+    : 'You choose which lost disputes to appeal.';
 }
-
-const REVIEW_ORDER_OPTIONS = [
-  { value: 'user-first', label: 'You review first' },
-  { value: 'stripe-first', label: 'Stripe reviews first' },
-];
 
 function AppealPreferencesModal({ open, onClose, value, onSave, showImpact = true, escalation, manual }) {
   const [mode, setMode] = useState(modeFromAppealPrefs(value));
@@ -427,8 +425,8 @@ function AppealPreferencesModal({ open, onClose, value, onSave, showImpact = tru
     <div className="flex flex-col gap-3 w-full">
       <AppealToggleItem
         recommended
-        title={getStripeHandlesAppealsTitle(showImpact)}
-        description={getStripeHandlesAppealsDescription(showImpact)}
+        title={getStripeHandlesAppealsTitle(showImpact, escalation)}
+        description={getStripeHandlesAppealsDescription(showImpact, escalation)}
         selected={mode === 'stripe'}
         onClick={() => setMode('stripe')}
       />
@@ -438,26 +436,7 @@ function AppealPreferencesModal({ open, onClose, value, onSave, showImpact = tru
           description={getAppealBothDescription({ escalation, manual, showImpact })}
           selected={mode === 'both'}
           onClick={() => setMode('both')}
-        >
-          {escalation === 'choice' && mode === 'both' && (
-            <div className="mt-3 flex items-center gap-2" onClick={(e) => e.stopPropagation()}>
-              {REVIEW_ORDER_OPTIONS.map((option) => (
-                <button
-                  key={option.value}
-                  type="button"
-                  onClick={() => setReviewOrder(option.value)}
-                  className={`h-6 flex items-center text-label-small-emphasized rounded-full px-2.5 transition-colors duration-150 ${
-                    reviewOrder === option.value
-                      ? 'bg-brand/10 text-brand'
-                      : 'border border-border text-subdued hover:bg-offset'
-                  }`}
-                >
-                  {option.label}
-                </button>
-              ))}
-            </div>
-          )}
-        </AppealToggleItem>
+        />
       )}
       <AppealToggleItem
         title={getHandleAllAppealsTitle(showImpact)}
@@ -488,6 +467,17 @@ function AppealPreferencesModal({ open, onClose, value, onSave, showImpact = tru
           <Link href="#" variant="secondary" className="text-body-small">View docs</Link>
         </p>
         <div className="mt-4">{toggleItems}</div>
+        {escalation === 'choice' && (
+          <div className="mt-6">
+            <h3 className="text-heading-small text-default">How do fees work?</h3>
+            <p className="text-body-small text-subdued mt-0.5">
+              Fees vary by who responds to the appeal. You pay fees for the appeals you send, win
+              or lose. Smart Disputes fee only applies if you win the appeal, Stripe covers fees if
+              the appeal is lost.{' '}
+              <Link href="#" variant="secondary" className="text-body-small">View pricing</Link>
+            </p>
+          </div>
+        )}
       </Dialog>
     );
   }
